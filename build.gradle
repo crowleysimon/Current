@@ -1,0 +1,141 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.11'
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+ext {
+
+    /** Android **/
+
+    minSdkVersion = 21
+    compileSdkVersion = 28
+    targetSdkVersion = 28
+    buildToolsVersion = '28.0.3'
+    versionCode = 1
+    versionName = '1.0'
+
+    /** Libraries **/
+
+    // AndroidX
+    appcompat_version = '1.0.2'
+    constraintlayout_version = '1.1.3'
+    room_version = '2.1.0-alpha03'
+    lifecycle_version = '2.0.0'
+    design_version = '1.1.0-alpha01'
+    support_v4_version = '1.0.0'
+    recyclerview_version = '1.0.0'
+
+    // RxJava https://github.com/ReactiveX/RxJava
+    rxJava_version = '2.2.5'
+
+    // RxKotlin https://github.com/ReactiveX/RxKotlin
+    rxKotlin_version = '2.3.0'
+
+    // RxAndroid https://github.com/ReactiveX/RxAndroid
+    rxAndroid_version = '2.1.0'
+
+    // Javax Inject
+    javax_annotation_version = '1.0'
+    javax_inject_version = '1'
+
+    // Dagger 2 (Dependency Injection) https://github.com/google/dagger
+    dagger_version = '2.17'
+
+    // RSS Parser https://github.com/prof18/RSS-Parser
+    rss_parser_version = '2.0.3'
+
+    /** Testing **/
+
+    // Junit
+    junit_version = '4.12'
+    mockito_kotlin_version = '1.5.0'
+    assertj_version = '3.8.0'
+
+    /** Module Dependencies **/
+
+    domain_dependencies = [
+            javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
+            javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
+            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
+    ]
+
+    domain_test_dependencies = [
+            junit  : "junit:junit:$junit_version",
+            mockito: "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+    ]
+
+    remote_dependencies = [
+            javax_annotation  : "javax.annotation:jsr250-api:$javax_annotation_version",
+            javax_inject      : "javax.inject:javax.inject:$javax_inject_version",
+            rxJava            : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            rxKotlin          : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            rss_parser        : "com.prof.rssparser:rssparser:$rss_parser_version"
+    ]
+
+    data_dependencies = [
+            javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
+            javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
+            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    ]
+
+    cache_dependencies = [
+            javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
+            javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
+            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            room            : "androidx.room:room-runtime:$room_version",
+            room_compiler   : "androidx.room:room-compiler:$room_version",
+            room_rxjava     : "androidx.room:room-rxjava2:$room_version",
+    ]
+
+    presentation_dependencies = [
+            constraint_layout       : "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
+            rxJava                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            rxKotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
+            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
+            dagger                  : "com.google.dagger:dagger:$dagger_version",
+            dagger_compiler         : "com.google.dagger:dagger-compiler:$dagger_version",
+            dagger_android          : "com.google.dagger:dagger-android:$dagger_version",
+            dagger_android_support  : "com.google.dagger:dagger-android-support:$dagger_version",
+            dagger_android_processor: "com.google.dagger:dagger-android-processor:$dagger_version",
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            javax_annotation        : "javax.annotation:jsr250-api:$javax_annotation_version",
+            javax_inject            : "javax.inject:javax.inject:$javax_inject_version",
+            lifecycle_extensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            lifecycle_runtime       : "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
+            lifecycle_compiler      : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version",
+            app_compat              : "androidx.appcompat:appcompat:$appcompat_version",
+            design                  : "com.google.android.material:material:$design_version",
+            support_V4              : "androidx.legacy:legacy-support-v4:$support_v4_version",
+            recyclerview            : "androidx.recyclerview:recyclerview:$recyclerview_version"
+    ]
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

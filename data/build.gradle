@@ -1,0 +1,17 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    def data_dependencies = rootProject.ext.data_dependencies
+
+    implementation project(':domain')
+
+    implementation data_dependencies.javax_annotation
+    implementation data_dependencies.javax_inject
+    implementation data_dependencies.rxJava
+    implementation data_dependencies.rxKotlin
+    implementation data_dependencies.kotlin
+
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

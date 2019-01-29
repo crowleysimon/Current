@@ -1,0 +1,19 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    def remote_dependencies = rootProject.ext.remote_dependencies
+
+    implementation project(':data')
+
+    implementation remote_dependencies.javax_annotation
+    implementation remote_dependencies.javax_inject
+    implementation remote_dependencies.rxJava
+    implementation remote_dependencies.rxKotlin
+    implementation remote_dependencies.kotlin
+    implementation remote_dependencies.rss_parser
+
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

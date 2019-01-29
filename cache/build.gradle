@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    def cache_dependencies = rootProject.ext.cache_dependencies
+
+    implementation project(':data')
+
+    implementation cache_dependencies.javax_annotation
+    implementation cache_dependencies.javax_inject
+    implementation cache_dependencies.rxJava
+    implementation cache_dependencies.rxKotlin
+    implementation cache_dependencies.kotlin
+    implementation cache_dependencies.room
+    kapt cache_dependencies.room_compiler
+    implementation cache_dependencies.room_rxjava
+}
