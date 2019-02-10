@@ -1,4 +1,6 @@
 package com.crowleysimon.data.model
 
-class FeedEntity {
-}
+data class FeedEntity(
+    val link: String,
+    val name: String
+)

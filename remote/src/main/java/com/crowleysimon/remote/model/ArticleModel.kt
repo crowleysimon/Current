@@ -1,11 +1,10 @@
-package com.crowleysimon.data.model
+package com.crowleysimon.remote.model
 
-data class ArticleEntity(
+data class ArticleModel(
     val title: String?,
     val link: String?,
     val pubDate: String?,
     val description: String?,
     val image: String?,
-    val read: Boolean?,
     val feedUrl: String
 )
