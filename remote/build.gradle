@@ -32,11 +32,10 @@ dependencies {
     implementation remote_dependencies.rxJava
     implementation remote_dependencies.rxKotlin
     implementation remote_dependencies.kotlin
-    implementation remote_dependencies.rss_parser
     implementation remote_dependencies.retrofit
     implementation remote_dependencies.retrofit_converter
     implementation remote_dependencies.retrofit_adapter
     implementation remote_dependencies.okHttp
     implementation remote_dependencies.okHttp_logger
-
+    implementation remote_dependencies.jsoup
 }

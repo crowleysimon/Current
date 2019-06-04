@@ -61,10 +61,10 @@ dependencies {
     implementation presentation_dependencies.retrofit_adapter
     implementation presentation_dependencies.okHttp
     implementation presentation_dependencies.okHttp_logger
-    implementation presentation_dependencies.rss_parser
     implementation presentation_dependencies.jodatime
     debugImplementation presentation_dependencies.leak_canary
     releaseImplementation presentation_dependencies.leak_canary_no_op
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation presentation_dependencies.glide
+    kapt presentation_dependencies.glide_compiler
+    implementation presentation_dependencies.aesthetic
 }
