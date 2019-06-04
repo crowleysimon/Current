@@ -1,8 +1,5 @@
 package com.crowleysimon.current.ui.feed
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.aesthetic.Aesthetic
+import com.afollestad.aesthetic.AutoSwitchMode
 import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
@@ -30,12 +29,40 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
     private var feedAdapter: FeedAdapter = FeedAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Aesthetic.attach(this)  // MUST come before super.onCreate(...)
         super.onCreate(savedInstanceState)
+
+        // If we haven't set any defaults, do that now
+        //if (Aesthetic.isFirstTime) {
+            Aesthetic.config {
+                isDark(false)
+                lightStatusBarMode(AutoSwitchMode.AUTO)
+                lightNavigationBarMode(AutoSwitchMode.AUTO)
+                colorStatusBar(res = R.color.white)
+                colorNavigationBar(res = R.color.white)
+                colorWindowBackground(res = R.color.window_background)
+                textColorPrimary(res = R.color.text_color_primary)
+                textColorSecondary(res = R.color.text_color_secondary)
+                textColorPrimaryInverse(res = R.color.text_color_primary_dark)
+                textColorSecondaryInverse(res = R.color.text_color_secondary_dark)
+            }
+        //}
+
         setContentView(R.layout.activity_feed)
         AndroidInjection.inject(this)
         bindViewModels()
         bindObservers()
         setupViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Aesthetic.resume(this)
+    }
+
+    override fun onPause() {
+        Aesthetic.pause(this)
+        super.onPause()
     }
 
     private fun bindViewModels() {
@@ -48,7 +75,7 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
                 handleRepositoryDataState(resource)
             }
         })
-        feedViewModel.refreshRepositories("https://www.androidpolice.com/feed")
+        feedViewModel.refreshRepositories("https://www.theverge.com/rss/index.xml")
         feedViewModel.fetchArticles()
     }
 
@@ -87,7 +114,7 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
     }
 
     override fun onArticleClicked(articleUrl: String?) {
-        if (articleUrl == null) {
+        /*if (articleUrl == null) {
             return
         }
         val intent = Intent(Intent.ACTION_VIEW)
@@ -96,6 +123,18 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(this, getString(R.string.no_app_found), Toast.LENGTH_LONG).show()
+        }*/
+        Aesthetic.config {
+            isDark(false)
+            lightStatusBarMode(AutoSwitchMode.OFF)
+            lightNavigationBarMode(AutoSwitchMode.OFF)
+            colorStatusBar(res = R.color.window_background_dark)
+            colorNavigationBar(res = R.color.window_background_dark)
+            colorWindowBackground(res = R.color.window_background_dark)
+            textColorPrimary(res = R.color.text_color_primary_dark)
+            textColorSecondary(res = R.color.text_color_secondary_dark)
+            textColorPrimaryInverse(res = R.color.text_color_primary)
+            textColorSecondaryInverse(res = R.color.text_color_secondary)
         }
     }
 }
