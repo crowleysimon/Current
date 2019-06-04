@@ -2,11 +2,11 @@ package com.crowleysimon.current.injection.module
 
 import com.crowleysimon.data.repository.FeedsRemote
 import com.crowleysimon.remote.FeedsRemoteImpl
+import com.crowleysimon.remote.RssItemConverterFactory
 import com.crowleysimon.remote.service.RssService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import me.toptas.rssconverter.RssConverterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,7 +21,7 @@ abstract class RemoteModule {
         @JvmStatic
         fun provideRssService(): RssService {
             val okHttpClient = OkHttpClient().newBuilder()
-                .connectTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build()
 
@@ -29,7 +29,7 @@ abstract class RemoteModule {
                 .client(okHttpClient)
                 .baseUrl("https://your.api.url/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(RssConverterFactory.create())
+                .addConverterFactory(RssItemConverterFactory.create())
                 .build()
             return retrofit.create(RssService::class.java)
         }
