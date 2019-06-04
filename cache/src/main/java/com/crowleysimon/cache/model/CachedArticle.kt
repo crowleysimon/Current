@@ -7,11 +7,21 @@ import androidx.room.PrimaryKey
 data class CachedArticle(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    var title: String?,
-    var link: String?,
-    var pubDate: String?,
-    var description: String?,
-    var image: String?,
-    var read: Boolean,
-    var feedUrl: String
+    val title: String?,
+    val link: String?,
+    val pubDate: String?,
+    val description: String?,
+    val image: String?,
+    val author: String? = null,
+    val category: String? = null,
+    val channel: String? = null,
+    val copyright: String? = null,
+    val generator: String? = null,
+    val guid: String? = null,
+    val item: String? = null,
+    val lastBuildDate: String? = null,
+    val managingEditor: String? = null,
+    val ttl: String? = null,
+    val read: Boolean,
+    val feedUrl: String
 )

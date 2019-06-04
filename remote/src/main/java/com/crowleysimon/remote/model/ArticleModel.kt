@@ -6,5 +6,15 @@ data class ArticleModel(
     val pubDate: String?,
     val description: String?,
     val image: String?,
+    val author: String? = null,
+    val category: String? = null,
+    val channel: String? = null,
+    val copyright: String? = null,
+    val generator: String? = null,
+    val guid: String? = null,
+    val item: String? = null,
+    val lastBuildDate: String? = null,
+    val managingEditor: String? = null,
+    val ttl: String? = null,
     val feedUrl: String
 )
