@@ -7,6 +7,7 @@ import com.crowleysimon.current.injection.ViewModelFactory
 import com.crowleysimon.current.injection.key.ViewModelKey
 import com.crowleysimon.current.ui.feed.FeedActivity
 import com.crowleysimon.current.ui.feed.FeedViewModel
+import com.crowleysimon.current.ui.reader.ReaderViewModel
 import com.crowleysimon.domain.executor.PostExecutionThread
 import dagger.Binds
 import dagger.Module
@@ -22,11 +23,15 @@ abstract class PresentationModule {
     @ContributesAndroidInjector
     abstract fun contributesFeedActivity(): FeedActivity
 
-
     @Binds
     @IntoMap
     @ViewModelKey(FeedViewModel::class)
     abstract fun bindFeedViewModel(viewModel: FeedViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReaderViewModel::class)
+    abstract fun bindReaderViewModel(viewModel: ReaderViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

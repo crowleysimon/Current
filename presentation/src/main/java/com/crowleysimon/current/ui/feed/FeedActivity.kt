@@ -18,6 +18,7 @@ import com.crowleysimon.current.injection.ViewModelFactory
 import com.crowleysimon.domain.model.Article
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_feed.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
@@ -103,8 +104,7 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
         progress.visibility = View.GONE
         feedRecyclerView.visibility = View.GONE
 
-        // Not great but just for demo purposes, would normally log error with Timber
-        Toast.makeText(this, throwable.localizedMessage, Toast.LENGTH_LONG).show()
+        Timber.e(throwable)
     }
 
     private fun setupViews() {

@@ -8,6 +8,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import net.danlew.android.joda.JodaTimeAndroid
+import timber.log.Timber
 import javax.inject.Inject
 
 class CurrentApp : Application(), HasActivityInjector {
@@ -19,7 +20,16 @@ class CurrentApp : Application(), HasActivityInjector {
         super.onCreate()
         configureDagger()
         configureLeakCanary()
+        configureTimber()
         JodaTimeAndroid.init(this)
+    }
+
+    private fun configureTimber() {
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            //Timber.plant(ReleaseTree())
+        }
     }
 
     private fun configureLeakCanary() {

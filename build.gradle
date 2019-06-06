@@ -18,22 +18,22 @@ ext {
     /** Android **/
 
     minSdkVersion = 23
-    compileSdkVersion = 28
-    targetSdkVersion = 28
-    buildToolsVersion = '28.0.3'
+    compileSdkVersion = 29
+    targetSdkVersion = 29
+    buildToolsVersion = '29.0.0'
     versionCode = 1
     versionName = '0.1'
 
     /** Libraries **/
 
-    // AndroidX
-    appcompat_version = '1.1.0-alpha05'
+    // AndroidX https://developer.android.com/jetpack/androidx/releases
+    appcompat_version = '1.1.0-beta01'
     constraintlayout_version = '2.0.0-beta1'
     room_version = '2.1.0-rc01'
     lifecycle_version = '2.1.0-beta01'
     design_version = '1.1.0-alpha07'
     support_v4_version = '1.0.0'
-    recyclerview_version = '1.1.0-alpha05'
+    recyclerview_version = '1.1.0-alpha06'
 
     // RxJava https://github.com/ReactiveX/RxJava
     rxJava_version = '2.2.9'
@@ -55,7 +55,7 @@ ext {
     okhttp_version = '4.0.0-RC1'
 
     // Retrofit https://github.com/square/retrofit
-    retrofit_version = '2.5.0'
+    retrofit_version = '2.6.0'
 
     // Jodatime Android https://github.com/dlew/joda-time-android
     jodatime_version = '2.10.1.2'
@@ -71,6 +71,9 @@ ext {
 
     // Aesthetic https://github.com/afollestad/aesthetic
     aesthetic_version = '1.0.0-beta05'
+
+    // Timber https://github.com/JakeWharton/timber
+    timber_version = '4.7.1'
 
     /** Testing **/
 
@@ -156,7 +159,8 @@ ext {
             leak_canary_no_op       : "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version",
             glide                   : "com.github.bumptech.glide:glide:$glide_version",
             glide_compiler          : "com.github.bumptech.glide:compiler:$glide_version",
-            aesthetic               : "com.afollestad:aesthetic:$aesthetic_version"
+            aesthetic               : "com.afollestad:aesthetic:$aesthetic_version",
+            timber                  : "com.jakewharton.timber:timber:$timber_version"
     ]
 }
 

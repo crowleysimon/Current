@@ -67,4 +67,5 @@ dependencies {
     implementation presentation_dependencies.glide
     kapt presentation_dependencies.glide_compiler
     implementation presentation_dependencies.aesthetic
+    implementation presentation_dependencies.timber
 }
