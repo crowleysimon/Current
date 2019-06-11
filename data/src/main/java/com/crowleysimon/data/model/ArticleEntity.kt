@@ -3,7 +3,7 @@ package com.crowleysimon.data.model
 data class ArticleEntity(
     val title: String?,
     val link: String?,
-    val pubDate: String?,
+    val pubDate: Long?,
     val description: String?,
     val image: String?,
     val author: String? = null,

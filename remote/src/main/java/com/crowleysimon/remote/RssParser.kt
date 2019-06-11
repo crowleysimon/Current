@@ -99,21 +99,21 @@ class RssParser {
             }
         }
         return RssItemModel(
-            author,
-            category,
-            channel,
-            copyright,
-            description,
-            generator,
-            guid,
-            image,
-            item,
-            lastBuildDate,
-            link,
-            managingEditor,
-            pubDate,
-            title,
-            ttl
+            author = author,
+            category = category,
+            channel = channel,
+            copyright = copyright,
+            description = description,
+            generator = generator,
+            guid = guid,
+            image = image,
+            item = item,
+            lastBuildDate = lastBuildDate,
+            link = link,
+            managingEditor = managingEditor,
+            pubDate = pubDate,
+            title = title,
+            ttl = ttl
         )
     }
 

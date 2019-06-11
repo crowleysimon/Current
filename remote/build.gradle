@@ -38,4 +38,5 @@ dependencies {
     implementation remote_dependencies.okHttp
     implementation remote_dependencies.okHttp_logger
     implementation remote_dependencies.jsoup
+    implementation remote_dependencies.jodatime
 }

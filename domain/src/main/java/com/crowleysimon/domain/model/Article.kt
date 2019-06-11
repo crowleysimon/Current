@@ -3,7 +3,7 @@ package com.crowleysimon.domain.model
 data class Article (
     val title: String?,
     val link: String?,
-    val pubDate: String?,
+    val pubDate: Long?,
     val description: String?,
     val image: String?,
     val author: String? = null,

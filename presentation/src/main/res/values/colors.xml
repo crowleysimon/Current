@@ -6,14 +6,16 @@
     <color name="white">#FFFFFF</color>
     <color name="white_30_alpha">#C0FFFFFF</color>
     <color name="black">#000000</color>
-    
+
     <color name="dark_grey">#121212</color>
 
-    <color name="text_color_primary">#212121</color>
-    <color name="text_color_secondary">#424242</color>
+    <color name="text_color_primary">#DF000000</color>
+    <color name="text_color_secondary">#9A000000</color>
     <color name="text_color_primary_dark">#FAFAFA</color>
     <color name="text_color_secondary_dark">#EEEEEE</color>
 
     <color name="window_background">@color/white</color>
     <color name="window_background_dark">@color/dark_grey</color>
+
+    <color name="image_placeholder">#E3E3E3</color>
 </resources>

@@ -114,27 +114,6 @@ class FeedActivity : AppCompatActivity(), ArticleViewHolder.ActionListener {
     }
 
     override fun onArticleClicked(articleUrl: String?) {
-        /*if (articleUrl == null) {
-            return
-        }
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(articleUrl)
-        try {
-            startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, getString(R.string.no_app_found), Toast.LENGTH_LONG).show()
-        }*/
-        Aesthetic.config {
-            isDark(false)
-            lightStatusBarMode(AutoSwitchMode.OFF)
-            lightNavigationBarMode(AutoSwitchMode.OFF)
-            colorStatusBar(res = R.color.window_background_dark)
-            colorNavigationBar(res = R.color.window_background_dark)
-            colorWindowBackground(res = R.color.window_background_dark)
-            textColorPrimary(res = R.color.text_color_primary_dark)
-            textColorSecondary(res = R.color.text_color_secondary_dark)
-            textColorPrimaryInverse(res = R.color.text_color_primary)
-            textColorSecondaryInverse(res = R.color.text_color_secondary)
-        }
+        //TODO:
     }
 }
