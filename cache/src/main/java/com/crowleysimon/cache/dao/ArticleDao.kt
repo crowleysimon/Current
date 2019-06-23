@@ -13,7 +13,7 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(articles: List<CachedArticle>): List<Long>
 
-    @Query("SELECT * FROM CachedArticle")
+    @Query("SELECT * FROM CachedArticle ORDER BY pubDate DESC")
     fun getAllArticles(): Observable<List<CachedArticle>>
 
     @Query("SELECT * FROM CachedArticle WHERE feedUrl = :feedUrl")

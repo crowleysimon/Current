@@ -2,6 +2,7 @@ package com.crowleysimon.cache.mapper
 
 import com.crowleysimon.cache.model.CachedArticle
 import com.crowleysimon.data.model.ArticleEntity
+import java.util.*
 import javax.inject.Inject
 
 class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, ArticleEntity> {
@@ -41,7 +42,7 @@ class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Art
             channel = entity.channel,
             copyright = entity.copyright,
             generator = entity.generator,
-            guid = entity.guid,
+            guid = entity.guid ?: UUID.randomUUID().toString(),
             lastBuildDate = entity.lastBuildDate,
             managingEditor = entity.managingEditor,
             ttl = entity.ttl

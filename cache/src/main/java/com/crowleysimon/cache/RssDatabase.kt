@@ -8,7 +8,7 @@ import com.crowleysimon.cache.dao.ArticleDao
 import com.crowleysimon.cache.model.CachedArticle
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         CachedArticle::class
     ]
@@ -28,7 +28,9 @@ abstract class RssDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): RssDatabase {
-            return Room.databaseBuilder(context.applicationContext, RssDatabase::class.java, "rss-database").build()
+            return Room.databaseBuilder(context.applicationContext, RssDatabase::class.java, "rss-database")
+                .fallbackToDestructiveMigration()
+                .build()
         }
     }
 }

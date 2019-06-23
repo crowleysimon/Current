@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CachedArticle(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
     val title: String?,
     val link: String?,
     val pubDate: Long?,
@@ -17,7 +15,7 @@ data class CachedArticle(
     val channel: String? = null,
     val copyright: String? = null,
     val generator: String? = null,
-    val guid: String? = null,
+    @PrimaryKey val guid: String,
     val item: String? = null,
     val lastBuildDate: String? = null,
     val managingEditor: String? = null,

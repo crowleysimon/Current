@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="72dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.crowleysimon.current.ui.views.RemoteImageView
         android:id="@+id/articleImageView"
         android:layout_width="100dp"
         android:layout_height="56dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

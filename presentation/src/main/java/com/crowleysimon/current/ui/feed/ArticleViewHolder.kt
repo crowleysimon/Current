@@ -14,14 +14,11 @@ class ArticleViewHolder(itemView: View, private val actionListener: ActionListen
     RecyclerView.ViewHolder(itemView) {
 
     fun bindArticle(article: Article) {
-        Glide.with(itemView.context)
-            .load(article.image)
-            .placeholder(R.color.image_placeholder)
-            .into(itemView.articleImageView)
-
+        itemView.articleImageView.load(article.image)
         itemView.articleTitleView.text = article.title
         itemView.articleSubtitleView.text = Jsoup.parse(article.description).text()
         article.pubDate?.let { millis ->
+            //TODO: move this to the mapper in the data layer?
             itemView.articleDateView.text = DateTime().withMillis(millis).formatTimeStamp(itemView.context)
         }
         itemView.articleCardView.setOnClickListener { actionListener?.onArticleClicked(article.link) }
