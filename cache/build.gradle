@@ -33,7 +33,7 @@ dependencies {
     implementation cache_dependencies.rxJava
     implementation cache_dependencies.rxKotlin
     implementation cache_dependencies.kotlin
-    api cache_dependencies.room
+    api cache_dependencies.room_runtime
     kapt cache_dependencies.room_compiler
     implementation cache_dependencies.room_rxjava
 }

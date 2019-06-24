@@ -1,3 +1,5 @@
+package com.crowleysimon.current.extensions
+
 import android.os.Build
 import android.util.FloatProperty
 import android.util.Property

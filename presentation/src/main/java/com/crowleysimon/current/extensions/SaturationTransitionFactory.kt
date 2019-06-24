@@ -5,7 +5,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.request.transition.NoTransition
 import com.bumptech.glide.request.transition.Transition
 import com.bumptech.glide.request.transition.TransitionFactory
-import saturateDrawableAnimator
 
 class SaturationTransitionFactory : TransitionFactory<Drawable> {
     override fun build(dataSource: DataSource, isFirstResource: Boolean): Transition<Drawable> {

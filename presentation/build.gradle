@@ -66,4 +66,7 @@ dependencies {
     kapt presentation_dependencies.glide_compiler
     implementation presentation_dependencies.aesthetic
     implementation presentation_dependencies.timber
+    implementation presentation_dependencies.ktx_core
+    implementation presentation_dependencies.navigation_fragment
+    implementation presentation_dependencies.navigation_ui
 }

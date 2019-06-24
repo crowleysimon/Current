@@ -1,3 +1,5 @@
+package com.crowleysimon.current.extensions
+
 import android.graphics.ColorMatrix
 
 /**

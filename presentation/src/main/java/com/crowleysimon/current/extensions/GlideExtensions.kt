@@ -1,4 +1,4 @@
-/*
+package com.crowleysimon.current.extensions/*
 import android.graphics.drawable.Drawable
 import android.annotation.SuppressLint
 import com.bumptech.glide.RequestBuilder

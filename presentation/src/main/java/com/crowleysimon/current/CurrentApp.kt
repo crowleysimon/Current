@@ -25,7 +25,7 @@ class CurrentApp : Application(), HasActivityInjector {
     }
 
     private fun configureTimber() {
-        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+        if (BuildConfig.BUILD_TYPE == "debug") {
             Timber.plant(Timber.DebugTree())
         } else {
             //Timber.plant(ReleaseTree())

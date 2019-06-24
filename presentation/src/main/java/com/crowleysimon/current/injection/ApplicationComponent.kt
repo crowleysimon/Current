@@ -5,18 +5,19 @@ import com.crowleysimon.current.CurrentApp
 import com.crowleysimon.current.injection.module.*
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        AndroidInjectionModule::class,
+        AndroidSupportInjectionModule::class,
         ApplicationModule::class,
         PresentationModule::class,
         DataModule::class,
         CacheModule::class,
-        RemoteModule::class
+        RemoteModule::class,
+        FragmentModule::class
     ]
 )
 interface ApplicationComponent {

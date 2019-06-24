@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.crowleysimon.current.data.UiThread
 import com.crowleysimon.current.injection.ViewModelFactory
 import com.crowleysimon.current.injection.key.ViewModelKey
-import com.crowleysimon.current.ui.feed.FeedActivity
+import com.crowleysimon.current.ui.MainActivity
 import com.crowleysimon.current.ui.feed.FeedViewModel
 import com.crowleysimon.current.ui.reader.ReaderViewModel
 import com.crowleysimon.domain.executor.PostExecutionThread
@@ -20,8 +20,8 @@ abstract class PresentationModule {
     @Binds
     abstract fun bindExecutionThread(uiThread: UiThread): PostExecutionThread
 
-    @ContributesAndroidInjector
-    abstract fun contributesFeedActivity(): FeedActivity
+    @ContributesAndroidInjector(modules = [FragmentModule::class])
+    abstract fun contributesMainActivity(): MainActivity
 
     @Binds
     @IntoMap

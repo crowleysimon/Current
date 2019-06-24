@@ -2,8 +2,6 @@ package com.crowleysimon.current.ui.feed
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.crowleysimon.current.R
 import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.domain.model.Article
 import kotlinx.android.synthetic.main.item_article.view.*
