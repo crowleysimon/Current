@@ -16,6 +16,9 @@ interface ArticleDao {
     @Query("SELECT * FROM CachedArticle ORDER BY pubDate DESC")
     fun getAllArticles(): Observable<List<CachedArticle>>
 
+    @Query("SELECT * FROM CachedArticle WHERE guid = :articleId")
+    fun getArticle(articleId: String): Observable<CachedArticle>
+
     @Query("SELECT * FROM CachedArticle WHERE feedUrl = :feedUrl")
     fun getArticlesForFeed(feedUrl: String): Observable<List<CachedArticle>>
 

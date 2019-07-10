@@ -10,5 +10,7 @@ interface ArticleRepository {
 
     fun getAllArticles(): Observable<List<Article>>
 
+    fun getArticle(articleId: String): Observable<Article>
+
     fun fetchArticlesForFeed(feedUrl: String): Completable
 }

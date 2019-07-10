@@ -2,11 +2,13 @@ package com.crowleysimon.current.ui.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
+import com.crowleysimon.current.ui.CurrentViewModel
+import com.crowleysimon.current.ui.feed.model.FeedUiModel
+import com.crowleysimon.current.ui.feed.model.toListItem
 import com.crowleysimon.domain.interactor.FetchArticlesForFeed
 import com.crowleysimon.domain.interactor.GetAllArticles
 import com.crowleysimon.domain.model.Article
@@ -17,9 +19,10 @@ import javax.inject.Inject
 class FeedViewModel @Inject constructor(
     private val fetchArticlesForFeed: FetchArticlesForFeed,
     private val getAllArticles: GetAllArticles
-) : ViewModel() {
+    //private val routing: Routing
+) : CurrentViewModel<Resource<FeedUiModel>>() {
 
-    private val liveData: MutableLiveData<Resource<List<Article>>> = MutableLiveData()
+    private val liveData: MutableLiveData<Resource<FeedUiModel>> = MutableLiveData()
 
     override fun onCleared() {
         fetchArticlesForFeed.dispose()
@@ -30,7 +33,7 @@ class FeedViewModel @Inject constructor(
     /**
      * Returns the livedata for the view model, does not actually update or modify any results
      */
-    fun getArticles(): LiveData<Resource<List<Article>>> {
+    override fun observeData(): LiveData<Resource<FeedUiModel>> {
         return liveData
     }
 
@@ -54,13 +57,19 @@ class FeedViewModel @Inject constructor(
         )
     }
 
+    private fun onArticleClicked(articleGuid: String) {
+        //routing.routeToWithBundle(R.id.readerFragment, bundleOf("articleId" to articleGuid))
+    }
+
     inner class ArticlesSubscriber : DisposableObserver<List<Article>>() {
         override fun onComplete() {
 
         }
 
-        override fun onNext(t: List<Article>) {
-            liveData.postValue(SuccessResource(t))
+        override fun onNext(articles: List<Article>) {
+            liveData.postValue(SuccessResource(FeedUiModel(articles.map { article ->
+                article.toListItem(::onArticleClicked)
+            })))
         }
 
         override fun onError(e: Throwable) {

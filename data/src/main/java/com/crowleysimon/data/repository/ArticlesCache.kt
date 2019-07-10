@@ -12,6 +12,8 @@ interface ArticlesCache {
 
     fun getAllArticles(): Observable<List<ArticleEntity>>
 
+    fun getArticle(articleId: String): Observable<ArticleEntity>
+
     fun getArticlesForFeed(feedUrl: String): Observable<List<ArticleEntity>>
 
     fun delete(article: ArticleEntity): Completable

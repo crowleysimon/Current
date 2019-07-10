@@ -14,6 +14,14 @@ class ArticlesDataRepository @Inject constructor(
     private val articleCache: ArticlesCache,
     private val feedRemote: FeedsRemote
 ) : ArticleRepository {
+
+    override fun getArticle(articleId: String): Observable<Article> {
+        return articleCache.getArticle(articleId)
+            .map { articleEntity ->
+                articleMapper.mapFromEntity(articleEntity)
+            }
+    }
+
     override fun getAllArticles(): Observable<List<Article>> {
         return articleCache.getAllArticles()
             .map { articleEntities ->

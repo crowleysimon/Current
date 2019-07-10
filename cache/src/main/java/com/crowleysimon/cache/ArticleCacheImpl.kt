@@ -12,6 +12,14 @@ class ArticleCacheImpl @Inject constructor(
     private val cachedArticleMapper: CachedArticleMapper
 ) : ArticlesCache {
 
+    override fun getArticle(articleId: String): Observable<ArticleEntity> {
+        return rssDatabase.articleDao()
+            .getArticle(articleId)
+            .map { cachedArticle ->
+                cachedArticleMapper.mapFromCached(cachedArticle)
+            }
+    }
+
     override fun insert(article: ArticleEntity): Completable {
         return Completable.defer {
             rssDatabase.articleDao()

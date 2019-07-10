@@ -18,6 +18,7 @@ import javax.inject.Singleton
         CacheModule::class,
         RemoteModule::class,
         FragmentModule::class
+        //RoutingModule::class
     ]
 )
 interface ApplicationComponent {

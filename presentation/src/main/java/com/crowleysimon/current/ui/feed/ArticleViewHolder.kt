@@ -1,28 +1,35 @@
 package com.crowleysimon.current.ui.feed
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.crowleysimon.current.R
 import com.crowleysimon.current.extensions.formatTimeStamp
-import com.crowleysimon.domain.model.Article
+import com.crowleysimon.current.extensions.load
+import com.crowleysimon.current.ui.Bindable
+import com.crowleysimon.current.ui.feed.model.ArticleListItem
 import kotlinx.android.synthetic.main.item_article.view.*
 import org.joda.time.DateTime
-import org.jsoup.Jsoup
 
-class ArticleViewHolder(itemView: View, private val actionListener: ActionListener?) :
-    RecyclerView.ViewHolder(itemView) {
+class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    Bindable<ArticleListItem> {
 
-    fun bindArticle(article: Article) {
-        itemView.articleImageView.load(article.image)
-        itemView.articleTitleView.text = article.title
-        itemView.articleSubtitleView.text = Jsoup.parse(article.description).text()
-        article.pubDate?.let { millis ->
-            //TODO: move this to the mapper in the data layer?
-            itemView.articleDateView.text = DateTime().withMillis(millis).formatTimeStamp(itemView.context)
+    override fun bind(model: ArticleListItem) {
+        itemView.articleImageView.load(model.image)
+        itemView.articleTitleView.text = model.title
+        itemView.articleSubtitleView.text = model.description
+        model.pubDate?.let { millis ->
+            //TODO: move this to the mapper
+            itemView.articleDateView.text =
+                DateTime().withMillis(millis).formatTimeStamp(itemView.context)
         }
-        itemView.articleCardView.setOnClickListener { actionListener?.onArticleClicked(article.link) }
+        itemView.articleCardView.setOnClickListener { model.onItemClick(model.guid) }
     }
 
-    interface ActionListener {
-        fun onArticleClicked(articleUrl: String?)
+    companion object {
+        fun make(parent: ViewGroup) = ArticleViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
+        )
     }
 }

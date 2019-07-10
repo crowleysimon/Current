@@ -35,4 +35,9 @@ abstract class PresentationModule {
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+/*
+    @Provides
+    fun providesRouting(routerFragment: RouterFragment): Routing {
+        return RouterFragment.fromActivity(routerFragment.requireActivity())
+    }*/
 }
