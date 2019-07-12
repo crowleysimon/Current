@@ -19,29 +19,29 @@ ext {
 
     minSdkVersion = 23
     compileSdkVersion = 29
-    targetSdkVersion = 28
-    buildToolsVersion = '29.0.0'
+    targetSdkVersion = 29
+    buildToolsVersion = '29.0.1'
     versionCode = 1
     versionName = '0.1'
 
     /** Libraries **/
 
     // AndroidX https://developer.android.com/jetpack/androidx/releases
-    appcompat_version = '1.1.0-beta01'
+    appcompat_version = '1.1.0-rc01'
     constraintlayout_version = '1.1.3'
     room_version = '2.1.0'
-    lifecycle_version = '2.1.0-beta01'
+    lifecycle_version = '2.2.0-alpha02'
     design_version = '1.1.0-alpha07'
     support_v4_version = '1.0.0'
-    recyclerview_version = '1.1.0-alpha06'
-    ktx_core_version = '1.0.1'
-    nav_version = '2.1.0-alpha05'
+    recyclerview_version = '1.1.0-beta01'
+    ktx_core_version = '1.0.2'
+    nav_version = '2.1.0-alpha06'
 
     // RxJava https://github.com/ReactiveX/RxJava
-    rxJava_version = '2.2.9'
+    rxJava_version = '2.2.10'
 
     // RxKotlin https://github.com/ReactiveX/RxKotlin
-    rxKotlin_version = '2.3.0'
+    rxKotlin_version = '2.4.0-beta.1'
 
     // RxAndroid https://github.com/ReactiveX/RxAndroid
     rxAndroid_version = '2.1.1'
@@ -51,10 +51,10 @@ ext {
     javax_inject_version = '1'
 
     // Dagger 2 (Dependency Injection) https://github.com/google/dagger
-    dagger_version = '2.23.1'
+    dagger_version = '2.23.2'
 
     // OkHttp https://github.com/square/okhttp
-    okhttp_version = '4.0.0-RC1'
+    okhttp_version = '4.0.1'
 
     // Retrofit https://github.com/square/retrofit
     retrofit_version = '2.6.0'
@@ -81,7 +81,7 @@ ext {
 
     // Junit
     junit_version = '4.12'
-    mockito_kotlin_version = '1.5.0'
+    mockito_kotlin_version = '1.6.0'
     assertj_version = '3.8.0'
 
     /** Module Dependencies **/

@@ -23,9 +23,7 @@ class FeedFragment: CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     private var adapter = CompositeAdapter<ArticleListItem>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_feed, container, false)
-        setHasOptionsMenu(true)
-        return view
+        return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
