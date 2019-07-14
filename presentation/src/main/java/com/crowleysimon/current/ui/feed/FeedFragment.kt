@@ -10,17 +10,16 @@ import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
-import com.crowleysimon.current.ui.CompositeAdapter
 import com.crowleysimon.current.ui.CurrentFragment
-import com.crowleysimon.current.ui.addBinding
-import com.crowleysimon.current.ui.feed.model.ArticleListItem
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_feed.*
 import timber.log.Timber
 
-class FeedFragment: CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
+class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
 
-    private var adapter = CompositeAdapter<ArticleListItem>()
+    private val adapter: GroupAdapter<ViewHolder> = GroupAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
@@ -31,9 +30,8 @@ class FeedFragment: CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
         bindObservers()
         setupViews()
 
+        //TODO:
         viewModel.refreshRepositories("https://www.theverge.com/rss/index.xml")
-        //viewModel.refreshRepositories("https://www.androidpolice.com/feed")
-        //viewModel.refreshRepositories("https://www.anandtech.com/rss/")
         viewModel.fetchArticles()
     }
 
@@ -57,24 +55,17 @@ class FeedFragment: CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     private fun setupScreenForSuccessState(data: FeedUiModel) {
         progress.visibility = View.GONE
         feedRecyclerView.visibility = View.VISIBLE
-        adapter.items = data.articles
-        adapter.notifyDataSetChanged()
+        adapter.addAll(data.articles)
     }
 
     private fun setupScreenForErrorState(throwable: Throwable) {
         progress.visibility = View.GONE
         feedRecyclerView.visibility = View.GONE
-
         Timber.e(throwable)
     }
 
     private fun setupViews() {
-        adapter.addBinding { ArticleViewHolder.make(feedRecyclerView) }
         feedRecyclerView.adapter = adapter
     }
-
-    /*override fun onArticleClicked(articleId: String?) {
-        findNavController().navigate(R.id.readerFragment, bundleOf("articleId" to articleId))
-    }*/
 
 }

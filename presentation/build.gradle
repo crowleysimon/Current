@@ -7,6 +7,10 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+    androidExtensions {
+        experimental = true
+    }
+
     defaultConfig {
         applicationId "com.crowleysimon.current"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -70,4 +74,6 @@ dependencies {
     implementation presentation_dependencies.ktx_fragment
     implementation presentation_dependencies.navigation_fragment
     implementation presentation_dependencies.navigation_ui
+    implementation presentation_dependencies.groupie
+    implementation presentation_dependencies.groupie_kotlin
 }
