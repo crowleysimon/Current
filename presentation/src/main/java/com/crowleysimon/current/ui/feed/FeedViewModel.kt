@@ -24,6 +24,8 @@ class FeedViewModel @Inject constructor(
 
     private val liveData: MutableLiveData<Resource<FeedUiModel>> = MutableLiveData()
 
+    val routerData: MutableLiveData<String> = MutableLiveData()
+
     override fun onCleared() {
         fetchArticlesForFeed.dispose()
         getAllArticles.dispose()
@@ -58,6 +60,7 @@ class FeedViewModel @Inject constructor(
     }
 
     private fun onArticleClicked(articleGuid: String) {
+        routerData.postValue(articleGuid)
         //routing.routeToWithBundle(R.id.readerFragment, bundleOf("articleId" to articleGuid))
     }
 

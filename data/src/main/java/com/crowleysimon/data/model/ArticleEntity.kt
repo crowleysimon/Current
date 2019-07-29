@@ -17,5 +17,6 @@ data class ArticleEntity(
     val managingEditor: String? = null,
     val ttl: String? = null,
     val read: Boolean?,
-    val feedUrl: String
+    val feedUrl: String,
+    val feedTitle: String?
 )

@@ -1,20 +1,19 @@
 package com.crowleysimon.current
 
-import android.app.Activity
 import android.app.Application
 import com.crowleysimon.current.injection.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
 
-class CurrentApp : Application(), HasActivityInjector {
+class CurrentApp : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate() {
         super.onCreate()
@@ -47,7 +46,7 @@ class CurrentApp : Application(), HasActivityInjector {
             .inject(this)
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> {
+    override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
     }
 }

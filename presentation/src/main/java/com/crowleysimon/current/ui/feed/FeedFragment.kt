@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
@@ -32,11 +34,17 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
 
         //TODO:
         viewModel.refreshRepositories("https://www.theverge.com/rss/index.xml")
+        viewModel.refreshRepositories("https://www.anandtech.com/rss/")
         viewModel.fetchArticles()
     }
 
     private fun bindObservers() {
         viewModel.observeData().observe(this, Observer(this::handleRepositoryDataState))
+        viewModel.routerData.observe(this, Observer(this::routeTo))
+    }
+
+    private fun routeTo(articleGuid: String) {
+        findNavController().navigate(R.id.readerFragment, bundleOf("articleId" to articleGuid))
     }
 
     private fun handleRepositoryDataState(resource: Resource<FeedUiModel>) {

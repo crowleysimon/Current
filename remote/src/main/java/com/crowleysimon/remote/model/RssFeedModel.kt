@@ -1,3 +1,5 @@
 package com.crowleysimon.remote.model
 
-data class RssFeedModel (val items: List<RssItemModel>)
+data class RssFeedModel (
+    val feedTitle: String?,
+    val items: List<RssItemModel>)

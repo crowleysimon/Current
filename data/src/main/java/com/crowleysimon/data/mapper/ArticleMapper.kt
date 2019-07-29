@@ -23,7 +23,8 @@ class ArticleMapper @Inject constructor() : EntityMapper<ArticleEntity, Article>
             guid = entity.guid,
             lastBuildDate = entity.lastBuildDate,
             managingEditor = entity.managingEditor,
-            ttl = entity.ttl
+            ttl = entity.ttl,
+            feedTitle = entity.feedTitle
         )
     }
 
@@ -44,7 +45,8 @@ class ArticleMapper @Inject constructor() : EntityMapper<ArticleEntity, Article>
             guid = domain.guid,
             lastBuildDate = domain.lastBuildDate,
             managingEditor = domain.managingEditor,
-            ttl = domain.ttl
+            ttl = domain.ttl,
+            feedTitle = domain.feedTitle
         )
     }
 

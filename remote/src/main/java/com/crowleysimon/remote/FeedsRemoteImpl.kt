@@ -17,7 +17,7 @@ class FeedsRemoteImpl @Inject constructor(
     override fun getArticlesForFeed(feedUrl: String): Single<List<ArticleEntity>> {
         return rssService.getArticlesForFeed(feedUrl)
             .map { rssFeed: RssFeedModel ->
-                rssFeed.items.map { rssItemMapper.mapFromResponse(it, feedUrl) }
+                rssFeed.items.map { rssItemMapper.mapFromResponse(it, feedUrl, rssFeed.feedTitle) }
             }
             .map { articleList ->
                 articleList.map { articleMapper.mapFromResponse(it) }

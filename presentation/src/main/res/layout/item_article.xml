@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/articleDateView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:ellipsize="end"
@@ -27,13 +27,33 @@
         android:textColor="?android:textColorSecondary"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@id/articleTitleView"
-        app:layout_constraintEnd_toStartOf="@id/guideline"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@id/articleFeedView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/articleImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="SmallSp"
         tools:text="TODAY" />
+
+    <TextView
+        android:id="@+id/articleFeedView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:layout_marginStart="8dp"
+        android:textColor="?android:colorAccent"
+        android:textSize="10sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/articleDateView"
+        app:layout_constraintBottom_toTopOf="@id/articleTitleView"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/articleDateView"
+        tools:ignore="SmallSp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:text="The Verge - All Posts" />
 
     <TextView
         android:id="@+id/articleTitleView"

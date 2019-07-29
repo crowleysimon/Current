@@ -27,7 +27,7 @@ abstract class RemoteModule {
 
             val retrofit = Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://your.api.url/")
+                .baseUrl("https://your.api.url/") //TODO: Needed something here to compile
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(RssItemConverterFactory.create())
                 .build()

@@ -23,6 +23,7 @@ class ArticleModelMapper @Inject constructor() : ModelMapper<ArticleModel, Artic
             lastBuildDate = response.lastBuildDate,
             managingEditor = response.managingEditor,
             ttl = response.ttl,
+            feedTitle = response.feedTitle,
             read = false
         )
     }
