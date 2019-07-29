@@ -1,4 +1,4 @@
-package com.crowleysimon.current.extensions
+package com.crowleysimon.current.extensions.glide
 
 import android.app.ActivityManager
 import android.content.Context

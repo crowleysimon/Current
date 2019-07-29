@@ -1,4 +1,4 @@
-package com.crowleysimon.current.extensions
+package com.crowleysimon.current.extensions.glide
 
 import android.graphics.ColorMatrix
 
@@ -77,9 +77,12 @@ class ImageLoadingColorMatrix : ColorMatrix() {
             }
         }
 
-        val PROP_SATURATION = createFloatProperty(saturationFloatProp)
-        val PROP_ALPHA = createFloatProperty(alphaFloatProp)
-        val PROP_DARKEN = createFloatProperty(darkenFloatProp)
+        val PROP_SATURATION =
+            createFloatProperty(saturationFloatProp)
+        val PROP_ALPHA =
+            createFloatProperty(alphaFloatProp)
+        val PROP_DARKEN =
+            createFloatProperty(darkenFloatProp)
 
         // This means that we darken the image by 20%
         private const val MAX_DARKEN_PERCENTAGE = 0.20f
