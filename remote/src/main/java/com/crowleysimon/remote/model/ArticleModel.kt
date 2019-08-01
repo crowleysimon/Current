@@ -16,5 +16,6 @@ data class ArticleModel(
     val lastBuildDate: String? = null,
     val managingEditor: String? = null,
     val ttl: String? = null,
-    val feedUrl: String
+    val feedUrl: String,
+    val feedTitle: String?
 )

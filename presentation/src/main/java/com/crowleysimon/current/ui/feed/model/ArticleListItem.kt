@@ -16,6 +16,7 @@ class ArticleListItem(
     private val title: String,
     private val description: String,
     private val pubDate: Long?, //TODO
+    private val feedTitle: String?,
     val onItemClick: (guid: String) -> Unit
 ) : Item<ViewHolder>() {
 
@@ -31,6 +32,7 @@ class ArticleListItem(
                 DateTime().withMillis(millis).formatTimeStamp(viewHolder.itemView.context)
         }
         viewHolder.itemView.articleCardView.setOnClickListener { onItemClick(guid) }
+        viewHolder.itemView.articleFeedView.text = feedTitle
     }
 
 }
@@ -42,6 +44,7 @@ fun Article.toListItem(onItemClick: (guid: String) -> Unit): ArticleListItem {
         this.title ?: "",
         Jsoup.parse(this.description).text(),
         this.pubDate,
+        this.feedTitle,
         onItemClick
     )
 }

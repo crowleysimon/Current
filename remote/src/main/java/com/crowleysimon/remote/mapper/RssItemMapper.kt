@@ -2,14 +2,24 @@ package com.crowleysimon.remote.mapper
 
 import com.crowleysimon.remote.model.ArticleModel
 import com.crowleysimon.remote.model.RssItemModel
-import javax.inject.Inject
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.util.*
+import javax.inject.Inject
 
 class RssItemMapper @Inject constructor() {
-    fun mapFromResponse(response: RssItemModel, feedUrl: String): ArticleModel {
-        val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ")
-        val dateTime = formatter.withLocale(Locale("en_US")).parseDateTime(response.pubDate)
+    fun mapFromResponse(response: RssItemModel, feedUrl: String, feedTitle: String?): ArticleModel {
+        val formatterFeed = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+        val formatterRss = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz")
+        val dateTime: DateTime?
+        dateTime = try {
+            formatterFeed.withLocale(Locale("en_US")).parseDateTime(response.pubDate)
+        } catch (ignored: Exception) {
+            formatterRss.withLocale(Locale("en_US")).parseDateTime(response.pubDate)
+        } finally {
+            DateTime.now()
+        }
+
         return ArticleModel(
             title = response.title,
             link = response.link,
@@ -26,7 +36,8 @@ class RssItemMapper @Inject constructor() {
             item = response.item,
             lastBuildDate = response.lastBuildDate,
             managingEditor = response.managingEditor,
-            ttl = response.ttl
+            ttl = response.ttl,
+            feedTitle = feedTitle
         )
     }
 }

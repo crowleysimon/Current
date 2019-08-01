@@ -24,7 +24,8 @@ class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Art
             guid = cached.guid,
             lastBuildDate = cached.lastBuildDate,
             managingEditor = cached.managingEditor,
-            ttl = cached.ttl
+            ttl = cached.ttl,
+            feedTitle = cached.feedTitle
         )
     }
 
@@ -45,7 +46,8 @@ class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Art
             guid = entity.guid ?: UUID.randomUUID().toString(),
             lastBuildDate = entity.lastBuildDate,
             managingEditor = entity.managingEditor,
-            ttl = entity.ttl
+            ttl = entity.ttl,
+            feedTitle = entity.feedTitle
         )
     }
 }

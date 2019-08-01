@@ -1,6 +1,7 @@
 package com.crowleysimon.remote
 
 import android.util.Xml
+import com.crowleysimon.remote.model.RssFeedModel
 import com.crowleysimon.remote.model.RssItemModel
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -12,40 +13,64 @@ import java.io.InputStream
 class RssParser {
 
     @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(inputStream: InputStream): List<RssItemModel> {
+    fun parse(inputStream: InputStream): RssFeedModel {
         inputStream.use { stream ->
             val parser: XmlPullParser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(stream, null)
             parser.nextTag()
-            return readFeed(parser)
+            return readXml(parser)
         }
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
-    private fun readFeed(parser: XmlPullParser): List<RssItemModel> {
-        val entries = mutableListOf<RssItemModel>()
+    private fun readXml(parser: XmlPullParser): RssFeedModel {
+        return when (parser.name) {
+            FEED -> readFeed(parser)
+            RSS -> readRss(parser)
+            else -> RssFeedModel(null, mutableListOf())
+        }
+    }
 
+    @Throws(XmlPullParserException::class, IOException::class)
+    private fun readFeed(parser: XmlPullParser): RssFeedModel {
+        val entries = mutableListOf<RssItemModel>()
+        var title: String? = null
         parser.require(XmlPullParser.START_TAG, ns, FEED)
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
                 continue
             }
-            // Starts by looking for the entry tag
-            if (parser.name == ENTRY) {
-                entries.add(readEntry(parser))
-            } else {
-                skip(parser)
+            when (parser.name) {
+                TITLE -> title = readSimpleData(parser)
+                ENTRY -> entries.add(readEntry(parser))
+                else -> skip(parser)
             }
         }
-        return entries
+        return RssFeedModel(title, entries)
+    }
+
+    @Throws(XmlPullParserException::class, IOException::class)
+    private fun readRss(parser: XmlPullParser): RssFeedModel {
+        val entries = mutableListOf<RssItemModel>()
+        var title: String? = null
+
+        parser.require(XmlPullParser.START_TAG, ns, RSS)
+        var eventType = parser.eventType
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            when (parser.name) {
+                TITLE -> title = readSimpleData(parser)
+                ITEM -> entries.add(readEntry(parser))
+            }
+            eventType = parser.next()
+        }
+        return RssFeedModel(title, entries)
     }
 
     // Parses the contents of an entry. If it encounters a title, summary, or link tag, hands them off
     // to their respective "read" methods for processing. Otherwise, skips the tag.
     @Throws(XmlPullParserException::class, IOException::class)
     private fun readEntry(parser: XmlPullParser): RssItemModel {
-        parser.require(XmlPullParser.START_TAG, ns, ENTRY)
         var author: String? = null
         var category: String? = null
         var channel: String? = null
@@ -67,7 +92,7 @@ class RssParser {
             }
             when (parser.name) {
                 TITLE -> title = readSimpleData(parser)
-                LINK -> link = readLink(parser)
+                //LINK -> link = readLink(parser)
                 ID,
                 GUID -> guid = readSimpleData(parser)
                 PUBLISHED,
@@ -181,6 +206,7 @@ class RssParser {
         const val CATEGORY = "category"
         const val CHANNEL = "channel"
         const val FEED = "feed"
+        const val RSS = "rss"
         const val COPYRIGHT = "copyright"
         const val RIGHTS = "rights"
         const val SUBTITLE = "subtitle"
@@ -202,6 +228,7 @@ class RssParser {
         const val TITLE = "title"
         const val TTL = "ttl"
         const val ENTRY = "entry"
+        const val ITEM = "item"
         private val ns: String? = null
     }
 
