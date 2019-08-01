@@ -20,10 +20,10 @@ abstract class ObservableUseCase<T, in Params> protected constructor(private val
     abstract fun buildUseCaseObservable(params: Params?): Observable<T>
 
     fun execute(observer: DisposableObserver<T>, params: Params? = null) {
-        val completable = this.buildUseCaseObservable(params)
+        val observable = this.buildUseCaseObservable(params)
             .subscribeOn(Schedulers.io())
             .observeOn(postExecutionThread.scheduler)
-        addDisposable(completable.subscribeWith(observer))
+        addDisposable(observable.subscribeWith(observer))
     }
 
     private fun addDisposable(disposable: Disposable) {
