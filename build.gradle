@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-alpha04'
+        classpath 'com.android.tools.build:gradle:3.6.0-alpha05'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -34,11 +34,11 @@ ext {
     design_version = '1.1.0-alpha07'
     support_v4_version = '1.0.0'
     recyclerview_version = '1.1.0-beta01'
-    nav_version = '2.1.0-alpha06'
+    nav_version = '2.1.0-beta02'
 
     // KTX
     ktx_core_version = '1.0.2'
-    ktx_fragment_version = '1.1.0-rc01'
+    ktx_fragment_version = '1.2.0-alpha01'
 
     // RxJava https://github.com/ReactiveX/RxJava
     rxJava_version = '2.2.10'
@@ -54,7 +54,7 @@ ext {
     javax_inject_version = '1'
 
     // Dagger 2 (Dependency Injection) https://github.com/google/dagger
-    dagger_version = '2.23.2'
+    dagger_version = '2.24'
 
     // OkHttp https://github.com/square/okhttp
     okhttp_version = '4.0.1'
@@ -63,7 +63,7 @@ ext {
     retrofit_version = '2.6.0'
 
     // Jodatime Android https://github.com/dlew/joda-time-android
-    jodatime_version = '2.10.1.2'
+    jodatime_version = '2.10.2'
 
     // Leak Canary https://github.com/square/leakcanary
     leak_canary_version = '1.6.3'
