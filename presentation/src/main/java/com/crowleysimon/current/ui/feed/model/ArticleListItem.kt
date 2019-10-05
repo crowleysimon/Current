@@ -4,8 +4,9 @@ import com.crowleysimon.current.R
 import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.load
 import com.crowleysimon.domain.model.Article
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
 import org.joda.time.DateTime
 import org.jsoup.Jsoup
@@ -18,23 +19,23 @@ class ArticleListItem(
     private val pubDate: Long?, //TODO
     private val feedTitle: String?,
     val onItemClick: (guid: String) -> Unit
-) : Item<ViewHolder>() {
+) : Item() {
+    override fun getLayout(): Int = R.layout.item_article
 
-    override fun getLayout() = R.layout.item_article
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.articleImageView.load(image)
-        viewHolder.itemView.articleTitleView.text = title
-        viewHolder.itemView.articleSubtitleView.text = description
-        pubDate?.let { millis ->
-            //TODO: move this to the mapper
-            viewHolder.itemView.articleDateView.text =
-                DateTime().withMillis(millis).formatTimeStamp(viewHolder.itemView.context)
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        viewHolder.apply {
+            articleImageView.load(image)
+            articleTitleView.text = title
+            articleSubtitleView.text = description
+            pubDate?.let { millis ->
+                //TODO: move this to the mapper
+                itemView.articleDateView.text =
+                    DateTime().withMillis(millis).formatTimeStamp(itemView.context)
+            }
+            articleCardView.setOnClickListener { onItemClick(guid) }
+            articleFeedView.text = feedTitle
         }
-        viewHolder.itemView.articleCardView.setOnClickListener { onItemClick(guid) }
-        viewHolder.itemView.articleFeedView.text = feedTitle
     }
-
 }
 
 fun Article.toListItem(onItemClick: (guid: String) -> Unit): ArticleListItem {

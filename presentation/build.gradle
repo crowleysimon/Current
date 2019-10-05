@@ -74,6 +74,7 @@ dependencies {
     implementation presentation_dependencies.ktx_fragment
     implementation presentation_dependencies.navigation_fragment
     implementation presentation_dependencies.navigation_ui
+    implementation presentation_dependencies.inbox_recyclerview
     implementation presentation_dependencies.groupie
     implementation presentation_dependencies.groupie_kotlin
 }

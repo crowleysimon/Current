@@ -18,9 +18,7 @@ import timber.log.Timber
 class ReaderFragment: CurrentFragment<ReaderViewModel>(ReaderViewModel::class.java) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_reader, container, false)
-        setHasOptionsMenu(true)
-        return view
+        return inflater.inflate(R.layout.fragment_reader, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,7 +46,7 @@ class ReaderFragment: CurrentFragment<ReaderViewModel>(ReaderViewModel::class.ja
     }
 
     private fun setupScreenForSuccessState(data: Article) {
-        readerWebView.loadUrl(data.link ?: "")
+        readerWebView.loadUrl(data.link ?: data.guid) // TODO: this is completely wrong
         /*val encodedHtml = Base64.encodeToString(data.description?.toByteArray(), Base64.NO_PADDING)
         readerWebView.loadData(encodedHtml, "text/html", "base64")*/
     }

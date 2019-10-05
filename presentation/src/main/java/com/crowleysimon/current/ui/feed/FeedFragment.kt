@@ -15,15 +15,17 @@ import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_feed.*
 import timber.log.Timber
 
 class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
 
-    private val adapter: GroupAdapter<ViewHolder> = GroupAdapter()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
@@ -63,7 +65,14 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     private fun setupScreenForSuccessState(data: FeedUiModel) {
         progress.visibility = View.GONE
         feedRecyclerView.visibility = View.VISIBLE
-        adapter.addAll(data.articles)
+        if (feedRecyclerView.adapter == null) {
+            val adapter = GroupAdapter<GroupieViewHolder>()
+            adapter.addAll(data.articles)
+            feedRecyclerView.adapter = adapter
+        } else {
+            (feedRecyclerView.adapter as GroupAdapter).update(data.articles)
+        }
+
     }
 
     private fun setupScreenForErrorState(throwable: Throwable) {
@@ -73,7 +82,7 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     }
 
     private fun setupViews() {
-        feedRecyclerView.adapter = adapter
+
     }
 
 }
