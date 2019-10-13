@@ -7,8 +7,8 @@ import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.ui.CurrentViewModel
+import com.crowleysimon.current.ui.feed.item.toListItem
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
-import com.crowleysimon.current.ui.feed.model.toListItem
 import com.crowleysimon.domain.interactor.FetchArticlesForFeed
 import com.crowleysimon.domain.interactor.GetAllArticles
 import com.crowleysimon.domain.model.Article
@@ -24,7 +24,7 @@ class FeedViewModel @Inject constructor(
 
     private val liveData: MutableLiveData<Resource<FeedUiModel>> = MutableLiveData()
 
-    val routerData: MutableLiveData<String> = MutableLiveData()
+    val routerData: MutableLiveData<Pair<String, String?>> = MutableLiveData()
 
     override fun onCleared() {
         fetchArticlesForFeed.dispose()
@@ -33,14 +33,14 @@ class FeedViewModel @Inject constructor(
     }
 
     /**
-     * Returns the livedata for the view model, does not actually update or modify any results
+     * Returns the LiveData for the view model, does not actually update or modify any results
      */
     override fun observeData(): LiveData<Resource<FeedUiModel>> {
         return liveData
     }
 
     /**
-     * Will call a use case that has the data layer update results that will be returned to the livedata.
+     * Will call a use case that has the data layer update results that will be returned to the LiveData.
      * Any observers subscribing to the live data will updated of the results.
      */
     fun fetchArticles() {
@@ -49,7 +49,7 @@ class FeedViewModel @Inject constructor(
     }
 
     /**
-     * Calls a use case that forces the remote layer to update the livedata.
+     * Calls a use case that forces the remote layer to update the LiveData.
      */
     fun refreshRepositories(feedUrl: String) {
         liveData.postValue(LoadingResource())
@@ -59,8 +59,8 @@ class FeedViewModel @Inject constructor(
         )
     }
 
-    private fun onArticleClicked(articleGuid: String) {
-        routerData.postValue(articleGuid)
+    private fun onArticleClicked(articleGuid: String, feedId: String?) {
+        routerData.postValue(Pair(articleGuid, feedId))
         //routing.routeToWithBundle(R.id.readerFragment, bundleOf("articleId" to articleGuid))
     }
 

@@ -6,4 +6,6 @@
     <string name="refresh">Refresh</string>
     <string name="no_app_found">No app found to display this content</string>
     <string name="yesterday">Yesterday</string>
+    <string name="article_continue_reading">Continue Reading</string>
+    <string name="articles_related_articles">Related Articles</string>
 </resources>

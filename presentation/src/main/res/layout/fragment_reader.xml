@@ -1,22 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/articleImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#ECECEC" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/readerHeaderView"
+            android:id="@+id/articleHeaderView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:fontFamily="@font/open_sans_semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleImageView"
+            tools:text="9 new trailers you should watch this week" />
 
-        <WebView
-            android:id="@+id/readerWebView"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/articleDescriptionView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            app:fontFamily="@font/open_sans_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleHeaderView"
+            tools:text="I got around to watching The Old Man the Gun the other week, the newest film from A Ghost Story director David Lowery. The film stars Robert Redford as an older man who can’t stop robbing banks (and being incredibly charming while doing it)." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/articleContinueReading"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/article_continue_reading"
+            android:visibility="gone"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleDescriptionView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/articleRelatedHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/articles_related_articles"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            app:fontFamily="@font/open_sans_semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleContinueReading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/relatedArticlesListView"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:clipChildren="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleRelatedHeading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

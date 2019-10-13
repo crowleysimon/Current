@@ -6,7 +6,7 @@ import com.crowleysimon.domain.repository.ArticleRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetArticlesForFeed @Inject constructor(
+open class GetArticlesForFeed @Inject constructor(
     private val articleRepository: ArticleRepository,
     postExecutionThread: PostExecutionThread
 ) : ObservableUseCase<List<Article>, GetArticlesForFeed.Params>(postExecutionThread) {

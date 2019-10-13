@@ -19,7 +19,7 @@ interface ArticleDao {
     @Query("SELECT * FROM CachedArticle WHERE guid = :articleId")
     fun getArticle(articleId: String): Observable<CachedArticle>
 
-    @Query("SELECT * FROM CachedArticle WHERE feedUrl = :feedUrl")
+    @Query("SELECT * FROM CachedArticle WHERE feedTitle = :feedUrl")
     fun getArticlesForFeed(feedUrl: String): Observable<List<CachedArticle>>
 
     @Delete

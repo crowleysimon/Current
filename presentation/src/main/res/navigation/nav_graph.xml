@@ -22,5 +22,9 @@
             android:name="articleId"
             app:argType="string"
             android:defaultValue='""' />
+        <argument
+            android:name="feedId"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

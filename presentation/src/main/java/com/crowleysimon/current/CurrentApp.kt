@@ -10,6 +10,8 @@ import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
 
+
+
 class CurrentApp : Application(), HasAndroidInjector {
 
     @Inject
@@ -21,6 +23,7 @@ class CurrentApp : Application(), HasAndroidInjector {
         configureLeakCanary()
         configureTimber()
         JodaTimeAndroid.init(this)
+        //registerActivityLifecycleCallbacks(CustomTabsActivityLifecycleCallbacks())
     }
 
     private fun configureTimber() {
@@ -35,7 +38,7 @@ class CurrentApp : Application(), HasAndroidInjector {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }
-        LeakCanary.install(this)
+        //LeakCanary.install(this)
     }
 
     private fun configureDagger() {
@@ -46,7 +49,5 @@ class CurrentApp : Application(), HasAndroidInjector {
             .inject(this)
     }
 
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
-    }
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

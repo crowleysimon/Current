@@ -12,31 +12,31 @@ import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
+import com.crowleysimon.current.databinding.FragmentFeedBinding
 import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_feed.*
 import timber.log.Timber
 
 class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+    private lateinit var binding: FragmentFeedBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentFeedBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindObservers()
-        setupViews()
 
         //TODO:
         viewModel.refreshRepositories("https://www.theverge.com/rss/index.xml")
-        viewModel.refreshRepositories("https://www.anandtech.com/rss/")
+        //viewModel.refreshRepositories("https://www.anandtech.com/rss/")
+        viewModel.refreshRepositories("https://www.polygon.com/rss/index.xml")
+        viewModel.refreshRepositories("https://www.vox.com/rss/index.xml")
         viewModel.fetchArticles()
     }
 
@@ -45,8 +45,11 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
         viewModel.routerData.observe(this, Observer(this::routeTo))
     }
 
-    private fun routeTo(articleGuid: String) {
-        findNavController().navigate(R.id.readerFragment, bundleOf("articleId" to articleGuid))
+    private fun routeTo(routeInfo: Pair<String, String?>) {
+        findNavController().navigate(
+            R.id.readerFragment,
+            bundleOf("articleId" to routeInfo.first, "feedId" to routeInfo.second)
+        )
     }
 
     private fun handleRepositoryDataState(resource: Resource<FeedUiModel>) {
@@ -58,31 +61,23 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     }
 
     private fun setupScreenForLoadingState() {
-        progress.visibility = View.VISIBLE
-        feedRecyclerView.visibility = View.GONE
+        binding.progress.visibility = View.VISIBLE
+        binding.feedRecyclerView.visibility = View.GONE
     }
 
     private fun setupScreenForSuccessState(data: FeedUiModel) {
-        progress.visibility = View.GONE
-        feedRecyclerView.visibility = View.VISIBLE
-        if (feedRecyclerView.adapter == null) {
-            val adapter = GroupAdapter<GroupieViewHolder>()
-            adapter.addAll(data.articles)
-            feedRecyclerView.adapter = adapter
+        binding.progress.visibility = View.GONE
+        binding.feedRecyclerView.visibility = View.VISIBLE
+        if (binding.feedRecyclerView.adapter == null) {
+            binding.feedRecyclerView.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(data.articles) }
         } else {
-            (feedRecyclerView.adapter as GroupAdapter).update(data.articles)
+            (binding.feedRecyclerView.adapter as GroupAdapter).updateAsync(data.articles)
         }
-
     }
 
     private fun setupScreenForErrorState(throwable: Throwable) {
-        progress.visibility = View.GONE
-        feedRecyclerView.visibility = View.GONE
+        binding.progress.visibility = View.GONE
+        binding.feedRecyclerView.visibility = View.GONE
         Timber.e(throwable)
     }
-
-    private fun setupViews() {
-
-    }
-
 }

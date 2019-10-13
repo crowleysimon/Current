@@ -1,5 +1,6 @@
 package com.crowleysimon.remote
 
+import android.util.Log
 import android.util.Xml
 import com.crowleysimon.remote.model.RssFeedModel
 import com.crowleysimon.remote.model.RssItemModel
@@ -61,6 +62,7 @@ class RssParser {
             when (parser.name) {
                 TITLE -> title = readSimpleData(parser)
                 ITEM -> entries.add(readEntry(parser))
+                else -> Log.w("TAG", "${parser.name} == name")
             }
             eventType = parser.next()
         }
@@ -92,7 +94,7 @@ class RssParser {
             }
             when (parser.name) {
                 TITLE -> title = readSimpleData(parser)
-                //LINK -> link = readLink(parser)
+                LINK -> link = readLink(parser)
                 ID,
                 GUID -> guid = readSimpleData(parser)
                 PUBLISHED,
