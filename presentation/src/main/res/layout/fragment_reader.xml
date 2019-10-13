@@ -14,6 +14,7 @@
             android:id="@+id/articleImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:foreground="@drawable/black_gradient_overlay"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,15 +27,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:textColor="#333333"
+            android:layout_marginBottom="8dp"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:fontFamily="@font/open_sans_semi_bold"
+            app:fontFamily="@font/open_sans_bold"
+            app:layout_constraintBottom_toBottomOf="@id/articleImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/articleImageView"
             tools:text="9 new trailers you should watch this week" />
+
+        <TextView
+            android:id="@+id/articleDateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="14sp"
+            app:fontFamily="@font/open_sans_light"
+            app:layout_constraintEnd_toStartOf="@id/articleAuthorView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleImageView"
+            tools:text="Today" />
+
+        <TextView
+            android:id="@+id/articleAuthorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="14sp"
+            app:fontFamily="@font/open_sans_light"
+            app:layout_constraintBaseline_toBaselineOf="@id/articleDateView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/articleDateView"
+            tools:text="By Some Author" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/articleDescriptionView"
@@ -43,11 +75,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:textColor="?android:textColorSecondary"
             android:textSize="16sp"
             app:fontFamily="@font/open_sans_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/articleHeaderView"
+            app:layout_constraintTop_toBottomOf="@id/articleDateView"
             tools:text="I got around to watching The Old Man the Gun the other week, the newest film from A Ghost Story director David Lowery. The film stars Robert Redford as an older man who can’t stop robbing banks (and being incredibly charming while doing it)." />
 
         <com.google.android.material.button.MaterialButton
@@ -72,7 +105,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="@string/articles_related_articles"
-            android:textColor="#333333"
+            android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             app:fontFamily="@font/open_sans_semi_bold"
             app:layout_constraintEnd_toEndOf="parent"

@@ -19,6 +19,7 @@ import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.databinding.FragmentReaderBinding
+import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.loadUrl
 import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.SpaceItemDecoration
@@ -26,6 +27,7 @@ import com.crowleysimon.current.ui.reader.item.ArticleCardItem
 import com.crowleysimon.domain.model.Article
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import org.joda.time.DateTime
 import timber.log.Timber
 
 class ReaderFragment : CurrentFragment<ReaderViewModel>(ReaderViewModel::class.java) {
@@ -86,6 +88,8 @@ class ReaderFragment : CurrentFragment<ReaderViewModel>(ReaderViewModel::class.j
     private fun setupScreenForSuccessState(data: Article) {
         binding.articleImageView.loadUrl(data.image)
         binding.articleHeaderView.text = data.title
+        binding.articleDateView.text = "Published ${DateTime().withMillis(data.pubDate!!).formatTimeStamp(requireContext())}"
+        data.author?.let { binding.articleAuthorView.text = "- by $it" }
         binding.articleDescriptionView.text = data.description?.stripHtml()
         binding.articleContinueReading.isVisible = true
         binding.articleContinueReading.setOnClickListener {

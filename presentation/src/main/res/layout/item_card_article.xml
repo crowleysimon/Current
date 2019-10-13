@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:ellipsize="end"
-        android:textColor="#333333"
+        android:textColor="?android:textColorSecondary"
         android:textSize="13sp"
         app:fontFamily="@font/open_sans"
         tools:text="9 new trailers you should watch this week" />

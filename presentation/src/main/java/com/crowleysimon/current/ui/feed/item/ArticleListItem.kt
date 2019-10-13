@@ -18,7 +18,7 @@ class ArticleListItem(
     private val pubDate: Long?, //TODO
     private val feedTitle: String?,
     val onItemClick: (guid: String, feedId: String?) -> Unit
-) : ViewBindingItem<ItemArticleBinding>() {
+) : ViewBindingItem<ItemArticleBinding>(guid.hashCode().toLong()) {
 
     override fun inflate(itemView: View): ItemArticleBinding = ItemArticleBinding.bind(itemView)
 

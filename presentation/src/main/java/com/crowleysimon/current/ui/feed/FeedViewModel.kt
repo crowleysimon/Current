@@ -2,10 +2,7 @@ package com.crowleysimon.current.ui.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.crowleysimon.current.data.ErrorResource
-import com.crowleysimon.current.data.LoadingResource
-import com.crowleysimon.current.data.Resource
-import com.crowleysimon.current.data.SuccessResource
+import com.crowleysimon.current.data.*
 import com.crowleysimon.current.ui.CurrentViewModel
 import com.crowleysimon.current.ui.feed.item.toListItem
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
@@ -24,7 +21,7 @@ class FeedViewModel @Inject constructor(
 
     private val liveData: MutableLiveData<Resource<FeedUiModel>> = MutableLiveData()
 
-    val routerData: MutableLiveData<Pair<String, String?>> = MutableLiveData()
+    val routerData: LiveEvent<Pair<String, String?>> = LiveEvent()
 
     override fun onCleared() {
         fetchArticlesForFeed.dispose()
