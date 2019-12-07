@@ -27,7 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            //minifyEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -85,8 +85,9 @@ dependencies {
     implementation presentation_dependencies.jsoup
     debugImplementation presentation_dependencies.leak_canary
     releaseImplementation presentation_dependencies.leak_canary_no_op
-    implementation presentation_dependencies.coil
-    implementation presentation_dependencies.aesthetic
+    //implementation presentation_dependencies.coil
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation presentation_dependencies.timber
     implementation presentation_dependencies.ktx_core
     implementation presentation_dependencies.ktx_fragment

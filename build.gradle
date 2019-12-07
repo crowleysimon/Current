@@ -1,14 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.3.60-eap-25'
     repositories {
         google()
         jcenter()
         mavenCentral()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-beta01'
+        classpath 'com.android.tools.build:gradle:4.0.0-alpha02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -29,20 +30,20 @@ ext {
     // AndroidX https://developer.android.com/jetpack/androidx/releases
     appcompat_version = '1.1.0'
     constraintlayout_version = '1.1.3'
-    room_version = '2.2.0'
-    lifecycle_version = '2.2.0-beta01'
-    design_version = '1.1.0-beta01'
+    room_version = '2.2.1'
+    lifecycle_version = '2.2.0-rc02'
+    design_version = '1.2.0-alpha01'
     support_v4_version = '1.0.0'
-    recyclerview_version = '1.1.0-beta05'
-    nav_version = '2.2.0-beta01'
-    custom_tabs_version = '1.2.0-alpha08'
+    recyclerview_version = '1.1.0-rc01'
+    nav_version = '2.2.0-rc02'
+    custom_tabs_version = '1.2.0-alpha09'
 
     // KTX
     ktx_core_version = '1.1.0'
-    ktx_fragment_version = '1.2.0-beta02'
+    ktx_fragment_version = '1.2.0-rc02'
 
     // RxJava https://github.com/ReactiveX/RxJava
-    rxJava_version = '2.2.13'
+    rxJava_version = '2.2.14'
 
     // RxKotlin https://github.com/ReactiveX/RxKotlin
     rxKotlin_version = '2.4.0'
@@ -55,7 +56,7 @@ ext {
     javax_inject_version = '1'
 
     // Dagger 2 (Dependency Injection) https://github.com/google/dagger
-    dagger_version = '2.24'
+    dagger_version = '2.25.2'
 
     // OkHttp https://github.com/square/okhttp
     okhttp_version = '4.2.2'
@@ -70,13 +71,10 @@ ext {
     leak_canary_version = '1.6.3'
 
     // Coil https://github.com/coil-kt/coil
-    coil_version = '0.7.0'
+    coil_version = '0.8.0'
 
     // Jsoup https://github.com/jhy/jsoup
     jsoup_version = '1.12.1'
-
-    // Aesthetic https://github.com/afollestad/aesthetic
-    aesthetic_version = '1.0.0-beta05'
 
     // Timber https://github.com/JakeWharton/timber
     timber_version = '4.7.1'
@@ -171,7 +169,6 @@ ext {
             leak_canary             : "com.squareup.leakcanary:leakcanary-android:$leak_canary_version",
             leak_canary_no_op       : "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version",
             coil                    : "io.coil-kt:coil:$coil_version",
-            aesthetic               : "com.afollestad:aesthetic:$aesthetic_version",
             timber                  : "com.jakewharton.timber:timber:$timber_version",
             jsoup                   : "org.jsoup:jsoup:$jsoup_version",
             ktx_core                : "androidx.core:core-ktx:$ktx_core_version",
@@ -192,6 +189,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         mavenCentral()
         maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 }
 
