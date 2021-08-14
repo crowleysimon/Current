@@ -1,15 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.60-eap-25'
+    ext.kotlin_version = '1.5.21'
     repositories {
         google()
         jcenter()
         mavenCentral()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0-alpha02'
+        classpath 'com.android.tools.build:gradle:7.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -19,28 +18,28 @@ ext {
     /** Android **/
 
     minSdkVersion = 23
-    compileSdkVersion = 29
-    targetSdkVersion = 29
-    buildToolsVersion = '29.0.1'
+    compileSdkVersion = 31
+    targetSdkVersion = 31
+    buildToolsVersion = '31.0.0'
     versionCode = 1
     versionName = '0.1'
 
     /** Libraries **/
 
     // AndroidX https://developer.android.com/jetpack/androidx/releases
-    appcompat_version = '1.1.0'
-    constraintlayout_version = '1.1.3'
-    room_version = '2.2.1'
+    appcompat_version = '1.3.1'
+    constraintlayout_version = '2.1.0'
+    room_version = '2.3.0'
     lifecycle_version = '2.2.0-rc02'
-    design_version = '1.2.0-alpha01'
+    design_version = '1.4.0'
     support_v4_version = '1.0.0'
-    recyclerview_version = '1.1.0-rc01'
-    nav_version = '2.2.0-rc02'
-    custom_tabs_version = '1.2.0-alpha09'
+    recyclerview_version = '1.2.1'
+    nav_version = '2.3.5'
+    custom_tabs_version = '1.3.0'
 
     // KTX
-    ktx_core_version = '1.1.0'
-    ktx_fragment_version = '1.2.0-rc02'
+    ktx_core_version = '1.6.0'
+    ktx_fragment_version = '1.3.6'
 
     // RxJava https://github.com/ReactiveX/RxJava
     rxJava_version = '2.2.14'
@@ -59,38 +58,31 @@ ext {
     dagger_version = '2.25.2'
 
     // OkHttp https://github.com/square/okhttp
-    okhttp_version = '4.2.2'
+    okhttp_version = '4.9.1'
 
     // Retrofit https://github.com/square/retrofit
-    retrofit_version = '2.6.2'
+    retrofit_version = '2.9.0'
 
     // Jodatime Android https://github.com/dlew/joda-time-android
-    jodatime_version = '2.10.3'
+    jodatime_version = '2.10.9'
 
     // Leak Canary https://github.com/square/leakcanary
-    leak_canary_version = '1.6.3'
+    leak_canary_version = '2.7'
 
     // Coil https://github.com/coil-kt/coil
-    coil_version = '0.8.0'
+    coil_version = '1.3.2'
 
     // Jsoup https://github.com/jhy/jsoup
-    jsoup_version = '1.12.1'
+    jsoup_version = '1.14.1'
 
     // Timber https://github.com/JakeWharton/timber
-    timber_version = '4.7.1'
+    timber_version = '5.0.1'
 
     // InboxRecyclerView https://github.com/saket/InboxRecyclerView
-    inbox_version = '2.0.0-beta3'
+    inbox_version = '3.0.0'
 
     // Groupie https://github.com/lisawray/groupie
-    groupie_version = '2.6.0'
-
-    /** Testing **/
-
-    // Junit
-    junit_version = '4.12'
-    mockito_kotlin_version = '1.6.0'
-    assertj_version = '3.8.0'
+    groupie_version = '2.9.0'
 
     /** Module Dependencies **/
 
@@ -99,11 +91,6 @@ ext {
             javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
             rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
             rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
-    ]
-
-    domain_test_dependencies = [
-            junit  : "junit:junit:$junit_version",
-            mockito: "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
     ]
 
     remote_dependencies = [
@@ -167,7 +154,6 @@ ext {
             okHttp_logger           : "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
             jodatime                : "net.danlew:android.joda:$jodatime_version",
             leak_canary             : "com.squareup.leakcanary:leakcanary-android:$leak_canary_version",
-            leak_canary_no_op       : "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version",
             coil                    : "io.coil-kt:coil:$coil_version",
             timber                  : "com.jakewharton.timber:timber:$timber_version",
             jsoup                   : "org.jsoup:jsoup:$jsoup_version",
@@ -188,8 +174,6 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
         mavenCentral()
-        maven { url "https://kotlin.bintray.com/kotlinx" }
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 }
 

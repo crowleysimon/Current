@@ -2,7 +2,6 @@ package com.crowleysimon.current
 
 import android.app.Application
 import com.crowleysimon.current.injection.DaggerApplicationComponent
-import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -20,9 +19,7 @@ class CurrentApp : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         configureDagger()
-        configureLeakCanary()
         configureTimber()
-        JodaTimeAndroid.init(this)
         //registerActivityLifecycleCallbacks(CustomTabsActivityLifecycleCallbacks())
     }
 
@@ -32,13 +29,6 @@ class CurrentApp : Application(), HasAndroidInjector {
         } else {
             //Timber.plant(ReleaseTree())
         }
-    }
-
-    private fun configureLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-        //LeakCanary.install(this)
     }
 
     private fun configureDagger() {

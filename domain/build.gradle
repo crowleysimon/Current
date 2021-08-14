@@ -2,17 +2,13 @@ apply plugin: 'kotlin'
 
 dependencies {
     def domain_dependencies = rootProject.ext.domain_dependencies
-    def domain_test_dependencies = rootProject.ext.domain_test_dependencies
 
     implementation domain_dependencies.javax_annotation
     implementation domain_dependencies.javax_inject
     implementation domain_dependencies.rxJava
     implementation domain_dependencies.rxKotlin
 
-    implementation domain_test_dependencies.junit
-    implementation domain_test_dependencies.mockito
-
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

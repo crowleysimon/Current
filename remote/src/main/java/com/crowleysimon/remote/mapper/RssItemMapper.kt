@@ -11,8 +11,7 @@ class RssItemMapper @Inject constructor() {
     fun mapFromResponse(response: RssItemModel, feedUrl: String, feedTitle: String?): ArticleModel {
         val formatterFeed = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ")
         val formatterRss = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz")
-        val dateTime: DateTime?
-        dateTime = try {
+        val dateTime = try {
             formatterFeed.withLocale(Locale("en_US")).parseDateTime(response.pubDate)
         } catch (ignored: Exception) {
             formatterRss.withLocale(Locale("en_US")).parseDateTime(response.pubDate)

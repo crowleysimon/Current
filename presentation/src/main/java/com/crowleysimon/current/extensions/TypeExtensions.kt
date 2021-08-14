@@ -8,7 +8,6 @@ import org.joda.time.format.DateTimeFormat
 import java.util.*
 
 /**
- * For: Chat List / Content Viewer / Post
  * Now and less than 1 day old - 9:52 am
  * 1 day old - Yesterday
  * 2 to 6 days old - Sat
