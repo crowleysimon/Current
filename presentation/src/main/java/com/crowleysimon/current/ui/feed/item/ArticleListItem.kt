@@ -8,7 +8,7 @@ import com.crowleysimon.current.data.ViewBindingItem
 import com.crowleysimon.current.databinding.ItemArticleBinding
 import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.loadUrl
-import com.crowleysimon.domain.model.Article
+import com.crowleysimon.data.model.Article
 import org.joda.time.DateTime
 import org.jsoup.Jsoup
 

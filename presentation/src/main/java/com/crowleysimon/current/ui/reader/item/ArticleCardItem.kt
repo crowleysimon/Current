@@ -5,7 +5,7 @@ import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ViewBindingItem
 import com.crowleysimon.current.databinding.ItemCardArticleBinding
 import com.crowleysimon.current.extensions.loadUrl
-import com.crowleysimon.domain.model.Article
+import com.crowleysimon.data.model.Article
 
 class ArticleCardItem(
     private val guid: String,

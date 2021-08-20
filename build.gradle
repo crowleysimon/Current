@@ -41,14 +41,8 @@ ext {
     ktx_core_version = '1.6.0'
     ktx_fragment_version = '1.3.6'
 
-    // RxJava https://github.com/ReactiveX/RxJava
-    rxJava_version = '2.2.14'
-
-    // RxKotlin https://github.com/ReactiveX/RxKotlin
-    rxKotlin_version = '2.4.0'
-
-    // RxAndroid https://github.com/ReactiveX/RxAndroid
-    rxAndroid_version = '2.1.1'
+    // Coroutines
+    coroutines_version = '1.5.1'
 
     // Javax Inject
     javax_annotation_version = '1.0'
@@ -86,52 +80,38 @@ ext {
 
     /** Module Dependencies **/
 
-    domain_dependencies = [
-            javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
-            javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
-            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
-    ]
-
     remote_dependencies = [
             javax_annotation  : "javax.annotation:jsr250-api:$javax_annotation_version",
             javax_inject      : "javax.inject:javax.inject:$javax_inject_version",
-            rxJava            : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin          : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             retrofit          : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_converter: "com.squareup.retrofit2:converter-moshi:$retrofit_version",
-            retrofit_adapter  : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
             okHttp            : "com.squareup.okhttp3:okhttp:$okhttp_version",
             okHttp_logger     : "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
             jsoup             : "org.jsoup:jsoup:$jsoup_version",
-            jodatime          : "net.danlew:android.joda:$jodatime_version"
+            jodatime          : "net.danlew:android.joda:$jodatime_version",
+            coroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
     ]
 
     data_dependencies = [
             javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
             javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
-            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            coroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
     ]
 
     cache_dependencies = [
             javax_annotation: "javax.annotation:jsr250-api:$javax_annotation_version",
             javax_inject    : "javax.inject:javax.inject:$javax_inject_version",
-            rxJava          : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             room_runtime    : "androidx.room:room-runtime:$room_version",
+            room_ktx        : "androidx.room:room-ktx:$room_version",
             room_compiler   : "androidx.room:room-compiler:$room_version",
-            room_rxjava     : "androidx.room:room-rxjava2:$room_version"
+            coroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
     ]
 
     presentation_dependencies = [
             constraint_layout       : "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
-            rxJava                  : "io.reactivex.rxjava2:rxjava:$rxJava_version",
-            rxKotlin                : "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version",
-            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
             dagger                  : "com.google.dagger:dagger:$dagger_version",
             dagger_compiler         : "com.google.dagger:dagger-compiler:$dagger_version",
             dagger_android          : "com.google.dagger:dagger-android:$dagger_version",
@@ -149,7 +129,6 @@ ext {
             recyclerview            : "androidx.recyclerview:recyclerview:$recyclerview_version",
             retrofit                : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_converter      : "com.squareup.retrofit2:converter-moshi:$retrofit_version",
-            retrofit_adapter        : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
             okHttp                  : "com.squareup.okhttp3:okhttp:$okhttp_version",
             okHttp_logger           : "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
             jodatime                : "net.danlew:android.joda:$jodatime_version",
@@ -164,7 +143,8 @@ ext {
             inbox_recyclerview      : "me.saket:inboxrecyclerview:$inbox_version",
             groupie                 : "com.xwray:groupie:$groupie_version",
             groupie_kotlin          : "com.xwray:groupie-kotlin-android-extensions:$groupie_version",
-            custom_tabs             : "androidx.browser:browser:$custom_tabs_version"
+            custom_tabs             : "androidx.browser:browser:$custom_tabs_version",
+            coroutines              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
     ]
 }
 

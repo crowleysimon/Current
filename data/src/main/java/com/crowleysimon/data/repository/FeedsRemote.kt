@@ -1,9 +1,8 @@
 package com.crowleysimon.data.repository
 
-import com.crowleysimon.data.model.ArticleEntity
-import io.reactivex.Single
+import com.crowleysimon.data.model.Article
 
 interface FeedsRemote {
 
-    fun getArticlesForFeed(feedUrl: String): Single<List<ArticleEntity>>
+    suspend fun getArticlesForFeed(feedUrl: String): List<Article>
 }

@@ -1,6 +1,6 @@
 package com.crowleysimon.data.model
 
-data class ArticleEntity(
+data class Article(
     val title: String?,
     val link: String?,
     val pubDate: Long?,

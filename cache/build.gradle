@@ -23,6 +23,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
 }
 
 dependencies {
@@ -32,10 +41,9 @@ dependencies {
 
     implementation cache_dependencies.javax_annotation
     implementation cache_dependencies.javax_inject
-    implementation cache_dependencies.rxJava
-    implementation cache_dependencies.rxKotlin
     implementation cache_dependencies.kotlin
+    implementation cache_dependencies.coroutines
     api cache_dependencies.room_runtime
     kapt cache_dependencies.room_compiler
-    implementation cache_dependencies.room_rxjava
+    implementation cache_dependencies.room_ktx
 }
