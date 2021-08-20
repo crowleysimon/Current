@@ -3,29 +3,30 @@ package com.crowleysimon.cache.dao
 import androidx.room.*
 import com.crowleysimon.cache.model.CachedArticle
 import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(article: CachedArticle): Long
+    suspend fun insert(article: CachedArticle)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(articles: List<CachedArticle>): List<Long>
+    suspend fun insertAll(articles: List<CachedArticle>)
 
     @Query("SELECT * FROM CachedArticle ORDER BY pubDate DESC")
-    fun getAllArticles(): Observable<List<CachedArticle>>
+    fun getAllArticles(): Flow<List<CachedArticle>>
 
     @Query("SELECT * FROM CachedArticle WHERE guid = :articleId")
-    fun getArticle(articleId: String): Observable<CachedArticle>
+    suspend fun getArticle(articleId: String): CachedArticle
 
     @Query("SELECT * FROM CachedArticle WHERE feedTitle = :feedUrl")
-    fun getArticlesForFeed(feedUrl: String): Observable<List<CachedArticle>>
+    suspend fun getArticlesForFeed(feedUrl: String): List<CachedArticle>
 
     @Delete
-    fun delete(article: CachedArticle)
+    suspend fun delete(article: CachedArticle)
 
     @Update
-    fun update(article: CachedArticle)
+    suspend fun update(article: CachedArticle)
 
 }

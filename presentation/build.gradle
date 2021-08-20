@@ -51,12 +51,8 @@ dependencies {
     implementation project(':data')
     implementation project(':remote')
     implementation project(':cache')
-    implementation project(':domain')
 
     implementation presentation_dependencies.constraint_layout
-    implementation presentation_dependencies.rxJava
-    implementation presentation_dependencies.rxKotlin
-    implementation presentation_dependencies.rxAndroid
     implementation presentation_dependencies.dagger
     kapt presentation_dependencies.dagger_compiler
     implementation presentation_dependencies.dagger_android
@@ -74,7 +70,6 @@ dependencies {
     implementation presentation_dependencies.recyclerview
     implementation presentation_dependencies.retrofit
     implementation presentation_dependencies.retrofit_converter
-    implementation presentation_dependencies.retrofit_adapter
     implementation presentation_dependencies.okHttp
     implementation presentation_dependencies.okHttp_logger
     implementation presentation_dependencies.jodatime
@@ -90,4 +85,5 @@ dependencies {
     implementation presentation_dependencies.groupie
     implementation presentation_dependencies.groupie_kotlin
     implementation presentation_dependencies.custom_tabs
+    implementation presentation_dependencies.coroutines
 }

@@ -1,14 +1,14 @@
 package com.crowleysimon.cache.mapper
 
 import com.crowleysimon.cache.model.CachedArticle
-import com.crowleysimon.data.model.ArticleEntity
+import com.crowleysimon.data.model.Article
 import java.util.*
 import javax.inject.Inject
 
-class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, ArticleEntity> {
+class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Article> {
 
-    override fun mapFromCached(cached: CachedArticle): ArticleEntity {
-        return ArticleEntity(
+    override fun mapFromCached(cached: CachedArticle): Article {
+        return Article(
             title = cached.title,
             link = cached.link,
             pubDate = cached.pubDate,
@@ -29,7 +29,7 @@ class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Art
         )
     }
 
-    override fun mapToCached(entity: ArticleEntity): CachedArticle {
+    override fun mapToCached(entity: Article): CachedArticle {
         return CachedArticle(
             title = entity.title,
             link = entity.link,

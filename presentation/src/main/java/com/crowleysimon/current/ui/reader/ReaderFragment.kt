@@ -24,7 +24,7 @@ import com.crowleysimon.current.extensions.loadUrl
 import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.SpaceItemDecoration
 import com.crowleysimon.current.ui.reader.item.ArticleCardItem
-import com.crowleysimon.domain.model.Article
+import com.crowleysimon.data.model.Article
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import org.joda.time.DateTime
@@ -45,13 +45,13 @@ class ReaderFragment : CurrentFragment<ReaderViewModel>(ReaderViewModel::class.j
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.relatedArticlesListView.layoutManager = layoutManager
-        viewModel.getArticle(arguments?.getString("articleId", ""))
+        viewModel.getArticle(arguments?.getString("articleId", "") ?: "")
         viewModel.getArticles(arguments?.getString("feedId", "") ?: "")
     }
 
     private fun bindObservers() {
-        viewModel.observeArticle().observe(this, Observer { handleRepositoryDataState(it) })
-        viewModel.observeRelatedArticles().observe(this, Observer { handleRelatedArticlesData(it) })
+        viewModel.observeArticle().observe(viewLifecycleOwner, Observer { handleRepositoryDataState(it) })
+        viewModel.observeRelatedArticles().observe(viewLifecycleOwner, Observer { handleRelatedArticlesData(it) })
     }
 
     private fun handleRepositoryDataState(resource: Resource<Article>) {

@@ -1,7 +1,7 @@
 package com.crowleysimon.current.injection.module
 
 import com.crowleysimon.data.ArticlesDataRepository
-import com.crowleysimon.domain.repository.ArticleRepository
+import com.crowleysimon.data.repository.ArticleRepository
 import dagger.Binds
 import dagger.Module
 

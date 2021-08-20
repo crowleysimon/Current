@@ -1,22 +1,21 @@
 package com.crowleysimon.data.repository
 
-import com.crowleysimon.data.model.ArticleEntity
-import io.reactivex.Completable
-import io.reactivex.Observable
+import com.crowleysimon.data.model.Article
+import kotlinx.coroutines.flow.Flow
 
 interface ArticlesCache {
 
-    fun insert(article: ArticleEntity): Completable
+    suspend fun insert(article: Article)
 
-    fun insertAll(articles: List<ArticleEntity>): Completable
+    suspend fun insertAll(articles: List<Article>)
 
-    fun getAllArticles(): Observable<List<ArticleEntity>>
+    fun getAllArticles(): Flow<List<Article>>
 
-    fun getArticle(articleId: String): Observable<ArticleEntity>
+    suspend fun getArticle(articleId: String): Article
 
-    fun getArticlesForFeed(feedUrl: String): Observable<List<ArticleEntity>>
+    suspend fun getArticlesForFeed(feedUrl: String): List<Article>
 
-    fun delete(article: ArticleEntity): Completable
+    suspend fun delete(article: Article)
 
-    fun update(article: ArticleEntity): Completable
+    suspend fun update(article: Article)
 }

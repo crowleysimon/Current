@@ -9,7 +9,6 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -28,7 +27,6 @@ abstract class RemoteModule {
             val retrofit = Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl("https://your.api.url/") //TODO: Needed something here to compile
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(RssItemConverterFactory.create())
                 .build()
             return retrofit.create(RssService::class.java)

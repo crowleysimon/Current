@@ -22,6 +22,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
 }
 
 dependencies {
@@ -31,14 +40,12 @@ dependencies {
 
     implementation remote_dependencies.javax_annotation
     implementation remote_dependencies.javax_inject
-    implementation remote_dependencies.rxJava
-    implementation remote_dependencies.rxKotlin
     implementation remote_dependencies.kotlin
     implementation remote_dependencies.retrofit
     implementation remote_dependencies.retrofit_converter
-    implementation remote_dependencies.retrofit_adapter
     implementation remote_dependencies.okHttp
     implementation remote_dependencies.okHttp_logger
     implementation remote_dependencies.jsoup
     implementation remote_dependencies.jodatime
+    implementation remote_dependencies.coroutines
 }
