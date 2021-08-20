@@ -25,11 +25,16 @@ class ArticleCacheImpl @Inject constructor(
 
     override fun getAllArticles(): Flow<List<Article>> {
         val articles = rssDatabase.articleDao().getAllArticles()
-        return articles.map { it.map { cachedArticle -> cachedArticleMapper.mapFromCached(cachedArticle) } }
+        return articles.map {
+            it.map { cachedArticle ->
+                cachedArticleMapper.mapFromCached(cachedArticle)
+            }
+        }
     }
 
     override suspend fun getArticlesForFeed(feedUrl: String): List<Article> =
-        rssDatabase.articleDao().getArticlesForFeed(feedUrl).map { cachedArticleMapper.mapFromCached(it) }
+        rssDatabase.articleDao().getArticlesForFeed(feedUrl)
+            .map { cachedArticleMapper.mapFromCached(it) }
 
     override suspend fun delete(article: Article) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -28,7 +28,9 @@ abstract class RssDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): RssDatabase {
-            return Room.databaseBuilder(context.applicationContext, RssDatabase::class.java, "rss-database")
+            return Room.databaseBuilder(context.applicationContext,
+                RssDatabase::class.java,
+                "rss-database")
                 .fallbackToDestructiveMigration()
                 .build()
         }

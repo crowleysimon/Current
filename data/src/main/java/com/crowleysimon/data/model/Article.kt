@@ -18,5 +18,5 @@ data class Article(
     val ttl: String? = null,
     val read: Boolean?,
     val feedUrl: String,
-    val feedTitle: String?
+    val feedTitle: String?,
 )

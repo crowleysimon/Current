@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class ArticlesDataRepository @Inject constructor(
     private val articleCache: ArticlesCache,
-    private val feedRemote: FeedsRemote
+    private val feedRemote: FeedsRemote,
 ) : ArticleRepository {
 
     override suspend fun getArticle(articleId: String): Article =
