@@ -1,24 +1,20 @@
 package com.crowleysimon.current
 
 import android.app.Application
-import com.crowleysimon.current.injection.DaggerApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import net.danlew.android.joda.JodaTimeAndroid
+import com.crowleysimon.current.injection.cacheModule
+import com.crowleysimon.current.injection.dataModule
+import com.crowleysimon.current.injection.presentationModule
+import com.crowleysimon.current.injection.remoteModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
 import timber.log.Timber
-import javax.inject.Inject
 
-
-
-class CurrentApp : Application(), HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+class CurrentApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        configureDagger()
+        configureKoin()
         configureTimber()
         //registerActivityLifecycleCallbacks(CustomTabsActivityLifecycleCallbacks())
     }
@@ -31,13 +27,11 @@ class CurrentApp : Application(), HasAndroidInjector {
         }
     }
 
-    private fun configureDagger() {
-        DaggerApplicationComponent
-            .builder()
-            .application(this)
-            .build()
-            .inject(this)
+    private fun configureKoin() {
+        startKoin {
+            androidLogger()
+            androidContext(this@CurrentApp)
+            modules(cacheModule, dataModule, presentationModule, remoteModule)
+        }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

@@ -3,9 +3,8 @@ package com.crowleysimon.cache.mapper
 import com.crowleysimon.cache.model.CachedArticle
 import com.crowleysimon.data.model.Article
 import java.util.*
-import javax.inject.Inject
 
-class CachedArticleMapper @Inject constructor() : CacheMapper<CachedArticle, Article> {
+class CachedArticleMapper() : CacheMapper<CachedArticle, Article> {
 
     override fun mapFromCached(cached: CachedArticle): Article {
         return Article(

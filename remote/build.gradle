@@ -38,8 +38,6 @@ dependencies {
 
     implementation project(':data')
 
-    implementation remote_dependencies.javax_annotation
-    implementation remote_dependencies.javax_inject
     implementation remote_dependencies.kotlin
     implementation remote_dependencies.retrofit
     implementation remote_dependencies.retrofit_converter

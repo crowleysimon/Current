@@ -5,9 +5,8 @@ import com.crowleysimon.data.repository.ArticleRepository
 import com.crowleysimon.data.repository.ArticlesCache
 import com.crowleysimon.data.repository.FeedsRemote
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class ArticlesDataRepository @Inject constructor(
+class ArticlesDataRepository(
     private val articleCache: ArticlesCache,
     private val feedRemote: FeedsRemote,
 ) : ArticleRepository {

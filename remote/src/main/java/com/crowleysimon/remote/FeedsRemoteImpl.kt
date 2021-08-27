@@ -5,9 +5,8 @@ import com.crowleysimon.data.repository.FeedsRemote
 import com.crowleysimon.remote.mapper.ArticleModelMapper
 import com.crowleysimon.remote.mapper.RssItemMapper
 import com.crowleysimon.remote.service.RssService
-import javax.inject.Inject
 
-class FeedsRemoteImpl @Inject constructor(
+class FeedsRemoteImpl(
     private val rssService: RssService,
     private val articleMapper: ArticleModelMapper,
     private val rssItemMapper: RssItemMapper,

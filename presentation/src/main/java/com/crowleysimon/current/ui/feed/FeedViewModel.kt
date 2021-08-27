@@ -13,11 +13,9 @@ import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.crowleysimon.data.repository.ArticleRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class FeedViewModel @Inject constructor(
+class FeedViewModel(
     private val repository: ArticleRepository,
-    //private val routing: Routing
 ) : CurrentViewModel<Resource<FeedUiModel>>() {
 
     private val liveData: MutableLiveData<Resource<FeedUiModel>> = MutableLiveData()

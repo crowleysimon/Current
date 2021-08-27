@@ -5,8 +5,6 @@ plugins {
 dependencies {
     def data_dependencies = rootProject.ext.data_dependencies
 
-    implementation data_dependencies.javax_annotation
-    implementation data_dependencies.javax_inject
     implementation data_dependencies.kotlin
     implementation data_dependencies.coroutines
 

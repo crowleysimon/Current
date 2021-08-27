@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ErrorResource
@@ -21,18 +21,20 @@ import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.databinding.FragmentReaderBinding
 import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.loadUrl
-import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.SpaceItemDecoration
 import com.crowleysimon.current.ui.reader.item.ArticleCardItem
 import com.crowleysimon.data.model.Article
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import org.joda.time.DateTime
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class ReaderFragment : CurrentFragment<ReaderViewModel>(ReaderViewModel::class.java) {
+class ReaderFragment : Fragment() {
 
     private lateinit var binding: FragmentReaderBinding
+
+    val viewModel: ReaderViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentReaderBinding.inflate(inflater)
@@ -50,8 +52,8 @@ class ReaderFragment : CurrentFragment<ReaderViewModel>(ReaderViewModel::class.j
     }
 
     private fun bindObservers() {
-        viewModel.observeArticle().observe(viewLifecycleOwner, Observer { handleRepositoryDataState(it) })
-        viewModel.observeRelatedArticles().observe(viewLifecycleOwner, Observer { handleRelatedArticlesData(it) })
+        viewModel.observeArticle().observe(viewLifecycleOwner) { handleRepositoryDataState(it) }
+        viewModel.observeRelatedArticles().observe(viewLifecycleOwner) { handleRelatedArticlesData(it) }
     }
 
     private fun handleRepositoryDataState(resource: Resource<Article>) {
