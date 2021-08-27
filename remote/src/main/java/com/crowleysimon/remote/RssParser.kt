@@ -1,6 +1,5 @@
 package com.crowleysimon.remote
 
-import android.util.Log
 import android.util.Xml
 import com.crowleysimon.remote.model.RssFeedModel
 import com.crowleysimon.remote.model.RssItemModel
@@ -8,6 +7,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
+import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
 
@@ -62,7 +62,7 @@ class RssParser {
             when (parser.name) {
                 TITLE -> title = readSimpleData(parser)
                 ITEM -> entries.add(readEntry(parser))
-                else -> Log.w("TAG", "${parser.name} == name")
+                else -> Timber.w("${parser.name} == name")
             }
             eventType = parser.next()
         }

@@ -4,7 +4,7 @@ import com.crowleysimon.cache.model.CachedArticle
 import com.crowleysimon.data.model.Article
 import java.util.*
 
-class CachedArticleMapper() : CacheMapper<CachedArticle, Article> {
+class CachedArticleMapper : CacheMapper<CachedArticle, Article> {
 
     override fun mapFromCached(cached: CachedArticle): Article {
         return Article(

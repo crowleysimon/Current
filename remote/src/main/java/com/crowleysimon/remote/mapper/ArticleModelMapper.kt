@@ -3,7 +3,7 @@ package com.crowleysimon.remote.mapper
 import com.crowleysimon.data.model.Article
 import com.crowleysimon.remote.model.ArticleModel
 
-class ArticleModelMapper() : ModelMapper<ArticleModel, Article> {
+class ArticleModelMapper : ModelMapper<ArticleModel, Article> {
     override fun mapFromResponse(response: ArticleModel): Article {
         return Article(
             title = response.title,

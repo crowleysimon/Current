@@ -2,7 +2,6 @@ package com.crowleysimon.current.extensions
 
 import android.widget.ImageView
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import coil.transform.Transformation
 import com.crowleysimon.current.R
 

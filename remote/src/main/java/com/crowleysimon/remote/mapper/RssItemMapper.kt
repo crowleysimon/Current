@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.util.*
 
-class RssItemMapper() {
+class RssItemMapper {
     fun mapFromResponse(response: RssItemModel, feedUrl: String, feedTitle: String?): ArticleModel {
         val formatterFeed = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ")
         val formatterRss = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz")

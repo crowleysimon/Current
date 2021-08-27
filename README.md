@@ -8,7 +8,7 @@ Still very early in development and as I build this in my spare time progress is
 
 ## Planned Features
 
-* Clean and Simple Design with a focus on Typogaphy
+* Clean and Simple Design with a focus on Typography
 * Animations and Gestures
 * Seamless Theme switching
 * Feedly Integration

@@ -1,4 +1,3 @@
 package com.crowleysimon.data
 
-class FeedsDataRepository {
-}
+class FeedsDataRepository
