@@ -12,18 +12,20 @@ import com.crowleysimon.data.model.Article
 import com.crowleysimon.data.repository.ArticleRepository
 import kotlinx.coroutines.launch
 
-class ReaderViewModel (
+class ReaderViewModel(
     private val repository: ArticleRepository,
 ) : ViewModel() {
 
-    private val liveData: MutableLiveData<Resource<Article>> = MutableLiveData()
+    private var _articles: MutableLiveData<Resource<Article>> = MutableLiveData()
+    val articles: LiveData<Resource<Article>> = _articles
 
-    private val relatedArticlesData: MutableLiveData<Resource<List<ArticleCardItem>>> =
+    private var _relatedArticles: MutableLiveData<Resource<List<ArticleCardItem>>> =
         MutableLiveData()
+    val relatedArticles: LiveData<Resource<List<ArticleCardItem>>> = _relatedArticles
 
     fun getArticle(articleID: String) {
         viewModelScope.launch {
-            liveData.postValue(SuccessResource(repository.getArticle(articleID)))
+            _articles.postValue(SuccessResource(repository.getArticle(articleID)))
         }
     }
 
@@ -31,11 +33,7 @@ class ReaderViewModel (
         viewModelScope.launch {
             val articles = repository.getArticlesForFeed(feedId)
                 .map { it.toCardItem(this@ReaderViewModel::getArticle) }
-            relatedArticlesData.postValue(SuccessResource(articles))
+            _relatedArticles.postValue(SuccessResource(articles))
         }
     }
-
-    fun observeArticle(): LiveData<Resource<Article>> = liveData
-
-    fun observeRelatedArticles(): LiveData<Resource<List<ArticleCardItem>>> = relatedArticlesData
 }

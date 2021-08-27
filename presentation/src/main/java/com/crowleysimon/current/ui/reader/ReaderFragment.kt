@@ -3,11 +3,10 @@ package com.crowleysimon.current.ui.reader
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.util.TypedValue.applyDimension
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -23,6 +22,7 @@ import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.loadUrl
 import com.crowleysimon.current.ui.SpaceItemDecoration
 import com.crowleysimon.current.ui.reader.item.ArticleCardItem
+import com.crowleysimon.current.ui.viewBinding
 import com.crowleysimon.data.model.Article
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -30,16 +30,10 @@ import org.joda.time.DateTime
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class ReaderFragment : Fragment() {
+class ReaderFragment : Fragment(R.layout.fragment_reader) {
 
-    private lateinit var binding: FragmentReaderBinding
-
-    val viewModel: ReaderViewModel by viewModel()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentReaderBinding.inflate(inflater)
-        return binding.root
-    }
+    private val binding by viewBinding(FragmentReaderBinding::bind)
+    private val viewModel: ReaderViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,36 +46,34 @@ class ReaderFragment : Fragment() {
     }
 
     private fun bindObservers() {
-        viewModel.observeArticle().observe(viewLifecycleOwner) { handleRepositoryDataState(it) }
-        viewModel.observeRelatedArticles().observe(viewLifecycleOwner) { handleRelatedArticlesData(it) }
+        viewModel.articles.observe(viewLifecycleOwner) { handleRepositoryDataState(it) }
+        viewModel.relatedArticles.observe(viewLifecycleOwner) { handleRelatedArticles(it) }
     }
 
-    private fun handleRepositoryDataState(resource: Resource<Article>) {
-        when (resource) {
-            is LoadingResource -> setupScreenForLoadingState()
-            is SuccessResource -> setupScreenForSuccessState(resource.data)
-            is ErrorResource -> setupScreenForErrorState(resource.throwable)
-        }
+    private fun handleRepositoryDataState(resource: Resource<Article>) = when (resource) {
+        is LoadingResource -> setupScreenForLoadingState()
+        is SuccessResource -> setupScreenForSuccessState(resource.data)
+        is ErrorResource -> setupScreenForErrorState(resource.throwable)
     }
 
-    private fun handleRelatedArticlesData(resource: Resource<List<ArticleCardItem>>) {
-        when (resource) {
-            is LoadingResource -> setupScreenForLoadingState()
-            is SuccessResource -> setupArticlesForSuccessState(resource.data)
-            is ErrorResource -> setupScreenForErrorState(resource.throwable)
-        }
+    private fun handleRelatedArticles(resource: Resource<List<ArticleCardItem>>) = when (resource) {
+        is LoadingResource -> setupScreenForLoadingState()
+        is SuccessResource -> setupArticlesForSuccessState(resource.data)
+        is ErrorResource -> setupScreenForErrorState(resource.throwable)
     }
 
     private fun setupArticlesForSuccessState(data: List<ArticleCardItem>) {
         if (binding.relatedArticlesListView.adapter == null) {
             binding.relatedArticlesListView.addItemDecoration(SpaceItemDecoration(convertDpToPx(16)))
-            binding.relatedArticlesListView.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(data) }
+            binding.relatedArticlesListView.adapter =
+                GroupAdapter<GroupieViewHolder>().apply { addAll(data) }
         } else {
             (binding.relatedArticlesListView.adapter as GroupAdapter).updateAsync(data)
         }
     }
 
-    private fun convertDpToPx(dp: Int) = applyDimension(COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics).toInt()
+    private fun convertDpToPx(dp: Int) =
+        applyDimension(COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics).toInt()
 
     private fun setupScreenForLoadingState() {
 
@@ -90,7 +82,8 @@ class ReaderFragment : Fragment() {
     private fun setupScreenForSuccessState(data: Article) {
         binding.articleImageView.loadUrl(data.image)
         binding.articleHeaderView.text = data.title
-        binding.articleDateView.text = "Published ${DateTime().withMillis(data.pubDate!!).formatTimeStamp(requireContext())}"
+        binding.articleDateView.text =
+            "Published ${DateTime().withMillis(data.pubDate!!).formatTimeStamp(requireContext())}"
         data.author?.let { binding.articleAuthorView.text = "- by $it" }
         binding.articleDescriptionView.text = data.description?.stripHtml()
         binding.articleContinueReading.isVisible = true
@@ -123,9 +116,5 @@ class ReaderFragment : Fragment() {
         Timber.e(throwable)
     }
 
-    private fun String.stripHtml(): String = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY).toString()
-    } else {
-        Html.fromHtml(this).toString()
-    }
+    private fun String.stripHtml(): String = Html.fromHtml(this, FROM_HTML_MODE_LEGACY).toString()
 }
