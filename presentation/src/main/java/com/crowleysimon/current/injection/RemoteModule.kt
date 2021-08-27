@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit
 
 val remoteModule = module {
     single<FeedsRemote> { FeedsRemoteImpl(get(), get(), get()) }
-
+    single { ArticleModelMapper() }
+    single { RssItemMapper() }
     single<RssService> {
         val okHttpClient = OkHttpClient().newBuilder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -27,7 +28,4 @@ val remoteModule = module {
             .build()
         retrofit.create(RssService::class.java)
     }
-
-    single { ArticleModelMapper() }
-    single { RssItemMapper() }
 }

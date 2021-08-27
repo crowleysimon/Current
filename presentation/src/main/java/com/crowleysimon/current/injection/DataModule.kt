@@ -10,8 +10,6 @@ import org.koin.dsl.module
 
 val dataModule = module {
     single<ArticleRepository> { ArticlesDataRepository(get(), get()) }
-
     single<ArticlesCache> { ArticleCacheImpl(get(), get()) }
-
     single<FeedsRemote> { FeedsRemoteImpl(get(), get(), get()) }
 }
