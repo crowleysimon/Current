@@ -2,7 +2,6 @@ package com.crowleysimon.cache.dao
 
 import androidx.room.*
 import com.crowleysimon.cache.model.CachedArticle
-import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 
 @Dao

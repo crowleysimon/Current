@@ -11,9 +11,8 @@ import com.crowleysimon.current.ui.reader.item.toCardItem
 import com.crowleysimon.data.model.Article
 import com.crowleysimon.data.repository.ArticleRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class ReaderViewModel @Inject constructor(
+class ReaderViewModel (
     private val repository: ArticleRepository,
 ) : ViewModel() {
 

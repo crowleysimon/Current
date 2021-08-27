@@ -39,8 +39,6 @@ dependencies {
 
     implementation project(':data')
 
-    implementation cache_dependencies.javax_annotation
-    implementation cache_dependencies.javax_inject
     implementation cache_dependencies.kotlin
     implementation cache_dependencies.coroutines
     api cache_dependencies.room_runtime

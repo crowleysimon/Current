@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.crowleysimon.current.R
@@ -13,17 +14,23 @@ import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.databinding.FragmentFeedBinding
-import com.crowleysimon.current.ui.CurrentFragment
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
+class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val viewModel: FeedViewModel by viewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = FragmentFeedBinding.inflate(inflater)
         return binding.root
     }
@@ -41,8 +48,9 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
     }
 
     private fun bindObservers() {
-        viewModel.observeData().observe(this, Observer(this::handleRepositoryDataState))
-        viewModel.routerData.observe(this, Observer(this::routeTo))
+        viewModel.observeData()
+            .observe(viewLifecycleOwner, Observer(this::handleRepositoryDataState))
+        viewModel.routerData.observe(viewLifecycleOwner, Observer(this::routeTo))
     }
 
     private fun routeTo(routeInfo: Pair<String, String?>) {
@@ -69,7 +77,8 @@ class FeedFragment : CurrentFragment<FeedViewModel>(FeedViewModel::class.java) {
         binding.progress.visibility = View.GONE
         binding.feedRecyclerView.visibility = View.VISIBLE
         if (binding.feedRecyclerView.adapter == null) {
-            binding.feedRecyclerView.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(data.articles) }
+            binding.feedRecyclerView.adapter =
+                GroupAdapter<GroupieViewHolder>().apply { addAll(data.articles) }
         } else {
             (binding.feedRecyclerView.adapter as GroupAdapter).updateAsync(data.articles)
         }

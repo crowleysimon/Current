@@ -1,12 +1,12 @@
 package com.crowleysimon.current.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.crowleysimon.current.R
 import com.crowleysimon.current.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener
-import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

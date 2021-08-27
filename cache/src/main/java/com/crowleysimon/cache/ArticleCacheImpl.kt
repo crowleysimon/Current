@@ -5,9 +5,8 @@ import com.crowleysimon.data.model.Article
 import com.crowleysimon.data.repository.ArticlesCache
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class ArticleCacheImpl @Inject constructor(
+class ArticleCacheImpl(
     private val rssDatabase: RssDatabase,
     private val cachedArticleMapper: CachedArticleMapper,
 ) : ArticlesCache {

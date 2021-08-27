@@ -53,17 +53,10 @@ dependencies {
     implementation project(':cache')
 
     implementation presentation_dependencies.constraint_layout
-    implementation presentation_dependencies.dagger
-    kapt presentation_dependencies.dagger_compiler
-    implementation presentation_dependencies.dagger_android
-    implementation presentation_dependencies.dagger_android_support
-    kapt presentation_dependencies.dagger_android_processor
     implementation presentation_dependencies.kotlin
-    implementation presentation_dependencies.javax_annotation
-    implementation presentation_dependencies.javax_inject
-    implementation presentation_dependencies.lifecycle_extensions
-    implementation presentation_dependencies.lifecycle_runtime
-    kapt presentation_dependencies.lifecycle_compiler
+    implementation presentation_dependencies.lifecycle_viewmodel
+    implementation presentation_dependencies.lifecycle_livedata
+    implementation presentation_dependencies.lifecycle_common
     implementation presentation_dependencies.app_compat
     implementation presentation_dependencies.design
     implementation presentation_dependencies.support_V4
@@ -86,4 +79,5 @@ dependencies {
     implementation presentation_dependencies.groupie_kotlin
     implementation presentation_dependencies.custom_tabs
     implementation presentation_dependencies.coroutines
+    implementation presentation_dependencies.koin
 }
