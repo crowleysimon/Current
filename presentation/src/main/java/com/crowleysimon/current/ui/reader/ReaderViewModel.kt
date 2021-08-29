@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.ui.reader.item.ArticleCardItem
 import com.crowleysimon.current.ui.reader.item.toCardItem
 import com.crowleysimon.data.model.Article
 import com.crowleysimon.data.repository.ArticleRepository
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ReaderViewModel(
@@ -26,7 +26,10 @@ class ReaderViewModel(
 
     fun getArticle(articleID: String) {
         viewModelScope.launch {
-            _articles.postValue(SuccessResource(repository.getArticle(articleID)))
+            _articles.value = when (val article = repository.getArticle(articleID)) {
+                null -> ErrorResource(Throwable("No Article Found for: $articleID"))
+                else -> SuccessResource(article)
+            }
         }
     }
 

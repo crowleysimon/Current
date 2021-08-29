@@ -11,7 +11,7 @@ interface ArticlesCache {
 
     fun getAllArticles(): Flow<List<Article>>
 
-    suspend fun getArticle(articleId: String): Article
+    suspend fun getArticle(articleId: String): Article?
 
     suspend fun getArticlesForFeed(feedUrl: String): List<Article>
 

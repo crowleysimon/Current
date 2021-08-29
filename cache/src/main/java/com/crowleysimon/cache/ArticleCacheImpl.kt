@@ -11,8 +11,10 @@ class ArticleCacheImpl(
     private val cachedArticleMapper: CachedArticleMapper,
 ) : ArticlesCache {
 
-    override suspend fun getArticle(articleId: String): Article =
-        cachedArticleMapper.mapFromCached(rssDatabase.articleDao().getArticle(articleId))
+    override suspend fun getArticle(articleId: String): Article? {
+        val article = rssDatabase.articleDao().getArticle(articleId)
+        return if (article != null) cachedArticleMapper.mapFromCached(article) else null
+    }
 
     override suspend fun insert(article: Article) =
         rssDatabase.articleDao().insert(cachedArticleMapper.mapToCached(article))

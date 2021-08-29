@@ -17,7 +17,7 @@ interface ArticleDao {
     fun getAllArticles(): Flow<List<CachedArticle>>
 
     @Query("SELECT * FROM CachedArticle WHERE guid = :articleId")
-    suspend fun getArticle(articleId: String): CachedArticle
+    suspend fun getArticle(articleId: String): CachedArticle?
 
     @Query("SELECT * FROM CachedArticle WHERE feedTitle = :feedUrl")
     suspend fun getArticlesForFeed(feedUrl: String): List<CachedArticle>
