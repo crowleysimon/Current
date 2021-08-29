@@ -17,10 +17,20 @@ class ArticlesDataRepository(
     override fun getAllArticles(): Flow<List<Article>> =
         articleCache.getAllArticles()
 
-    override suspend fun fetchArticlesForFeed(feedUrl: String) =
-        articleCache.insertAll(feedRemote.getArticlesForFeed(feedUrl))
+    override suspend fun fetchArticlesForFeed(feedUrl: String) {
+        val articles = feedRemote.getArticlesForFeed(feedUrl).map { article ->
+            val cachedArticle = articleCache.getArticle(article.guid)
+            article.copy(read = cachedArticle.read)
+        }
+        articleCache.insertAll(articles)
+    }
 
     override suspend fun getArticlesForFeed(feedUrl: String): List<Article> =
         articleCache.getArticlesForFeed(feedUrl)
+
+    override suspend fun markArticleRead(articleId: String) {
+        val article = articleCache.getArticle(articleId).copy(read = true)
+        return articleCache.update(article)
+    }
 
 }

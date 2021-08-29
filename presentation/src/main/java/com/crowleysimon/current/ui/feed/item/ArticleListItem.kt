@@ -19,6 +19,7 @@ class ArticleListItem(
     private val description: String,
     private val pubDate: Long?, //TODO
     private val feedTitle: String?,
+    private val isRead: Boolean,
     val onItemClick: (guid: String, feedId: String?) -> Unit,
 ) : ViewBindingItem<ItemArticleBinding>(guid.hashCode().toLong()) {
 
@@ -39,22 +40,24 @@ class ArticleListItem(
         articleSubtitleView.text = description
         pubDate?.let { millis ->
             //TODO: move this to the mapper
-            articleDateView.text =
-                DateTime().withMillis(millis).formatTimeStamp(root.context)
+            articleDateView.text = DateTime().withMillis(millis).formatTimeStamp(root.context)
         }
         articleCardView.setOnClickListener { onItemClick(guid, feedTitle) }
         articleFeedView.text = feedTitle
+        //articleTitleView.setTextColor(ContextCompat.getColor(root.context, R.color.text))
+        articleTitleView.isEnabled = !isRead
     }
 }
 
 fun Article.toListItem(onItemClick: (guid: String, feedId: String?) -> Unit): ArticleListItem {
     return ArticleListItem(
-        this.guid ?: "",
-        this.image ?: "",
-        this.title ?: "",
-        Jsoup.parse(this.description).text(),
-        this.pubDate,
-        this.feedTitle,
+        guid ?: "",
+        image ?: "",
+        title ?: "",
+        Jsoup.parse(description ?: "").text(),
+        pubDate,
+        feedTitle,
+        read == true,
         onItemClick
     )
 }

@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParserException
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
+import java.util.*
 
 class RssParser {
 
@@ -79,7 +80,7 @@ class RssParser {
         var copyright: String? = null
         var description: String? = null
         var generator: String? = null
-        var guid: String? = null
+        var guid: String = UUID.randomUUID().toString() // TODO:
         var image: String? = null
         var item: String? = null
         var lastBuildDate: String? = null

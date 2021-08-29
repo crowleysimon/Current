@@ -9,7 +9,7 @@ data class RssItemModel(
     val copyright: String? = null,
     val description: String? = null,
     val generator: String? = null,
-    val guid: String? = null,
+    val guid: String,
     val image: String? = null,
     val item: String? = null,
     val lastBuildDate: String? = null,

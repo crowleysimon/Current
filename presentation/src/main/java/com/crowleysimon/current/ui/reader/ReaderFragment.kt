@@ -110,6 +110,9 @@ class ReaderFragment : Fragment(R.layout.fragment_reader) {
         /*val encodedHtml = Base64.encodeToString(data.description?.toByteArray(), Base64.NO_PADDING)
         readerWebView.loadData(encodedHtml, "text/html", "base64")*/
         binding.scrollView.scrollTo(0, 0)
+        if (data.read == false) {
+            viewModel.markArticleRead(data.guid)
+        }
     }
 
     private fun setupScreenForErrorState(throwable: Throwable) {

@@ -10,6 +10,7 @@ import com.crowleysimon.current.ui.reader.item.ArticleCardItem
 import com.crowleysimon.current.ui.reader.item.toCardItem
 import com.crowleysimon.data.model.Article
 import com.crowleysimon.data.repository.ArticleRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ReaderViewModel(
@@ -35,5 +36,9 @@ class ReaderViewModel(
                 .map { it.toCardItem(this@ReaderViewModel::getArticle) }
             _relatedArticles.postValue(SuccessResource(articles))
         }
+    }
+
+    fun markArticleRead(articleID: String) {
+        viewModelScope.launch { repository.markArticleRead(articleID) }
     }
 }

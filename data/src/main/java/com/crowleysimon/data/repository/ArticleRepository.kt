@@ -12,4 +12,7 @@ interface ArticleRepository {
     suspend fun fetchArticlesForFeed(feedUrl: String)
 
     suspend fun getArticlesForFeed(feedUrl: String): List<Article>
+
+    suspend fun markArticleRead(articleId: String)
+
 }

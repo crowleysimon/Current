@@ -40,7 +40,7 @@ class ArticleCacheImpl(
     }
 
     override suspend fun update(article: Article) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        rssDatabase.articleDao().update(cachedArticleMapper.mapToCached(article))
     }
 
 }

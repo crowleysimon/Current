@@ -11,7 +11,7 @@ data class Article(
     val channel: String? = null,
     val copyright: String? = null,
     val generator: String? = null,
-    val guid: String? = null,
+    val guid: String,
     val item: String? = null,
     val lastBuildDate: String? = null,
     val managingEditor: String? = null,
