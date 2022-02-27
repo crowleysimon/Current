@@ -11,7 +11,6 @@ import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.ui.feed.item.toListItem
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.crowleysimon.data.repository.ArticleRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class FeedViewModel(

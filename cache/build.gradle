@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp' version "1.6.0-1.0.1"
 }
 
 android {
@@ -42,7 +42,7 @@ dependencies {
     implementation cache_dependencies.kotlin
     implementation cache_dependencies.coroutines
     api cache_dependencies.room_runtime
-    kapt cache_dependencies.room_compiler
+    ksp cache_dependencies.room_compiler
     implementation cache_dependencies.room_ktx
     implementation cache_dependencies.timber
 }

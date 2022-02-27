@@ -51,7 +51,7 @@ class ArticleListItem(
 
 fun Article.toListItem(onItemClick: (guid: String, feedId: String?) -> Unit): ArticleListItem {
     return ArticleListItem(
-        guid ?: "",
+        guid,
         image ?: "",
         title ?: "",
         Jsoup.parse(description ?: "").text(),

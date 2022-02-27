@@ -29,7 +29,7 @@ class ArticleCardItem(
 
 fun Article.toCardItem(onItemClick: (guid: String) -> Unit): ArticleCardItem {
     return ArticleCardItem(
-        this.guid ?: "",
+        this.guid,
         this.image ?: "",
         this.title ?: "",
         onItemClick

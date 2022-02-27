@@ -1,14 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.5.30'
+    ext.kotlin_version = '1.6.0'
     repositories {
         google()
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.0-alpha10'
+        classpath 'com.android.tools.build:gradle:7.3.0-alpha03'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +17,7 @@ ext {
 
     /** Android **/
 
-    minSdkVersion = 24
+    minSdkVersion = 29
     compileSdkVersion = 31
     targetSdkVersion = 31
     buildToolsVersion = '31.0.0'
@@ -27,41 +27,41 @@ ext {
     /** Libraries **/
 
     // AndroidX https://developer.android.com/jetpack/androidx/releases
-    appcompat_version = '1.4.0-alpha03'
-    browser_version = '1.3.0'
-    constraintlayout_version = '2.1.0'
-    core_version = '1.7.0-alpha01'
-    design_version = '1.5.0-alpha02'
-    fragment_version = '1.4.0-alpha07'
-    lifecycle_version = '2.4.0-alpha03'
-    nav_version = '2.4.0-alpha07'
-    recyclerview_version = '1.2.1'
-    room_version = '2.4.0-alpha04'
+    appcompat_version = '1.6.0-alpha01'
+    browser_version = '1.4.0'
+    constraintlayout_version = '2.1.3'
+    core_version = '1.9.0-alpha01'
+    design_version = '1.6.0-alpha03'
+    fragment_version = '1.5.0-alpha03'
+    lifecycle_version = '2.5.0-alpha03'
+    nav_version = '2.5.0-alpha03'
+    recyclerview_version = '1.3.0-alpha01'
+    room_version = '2.5.0-alpha01'
     support_v4_version = '1.0.0'
 
     // Coroutines https://github.com/Kotlin/kotlinx.coroutines/blob/master/CHANGES.md
-    coroutines_version = '1.5.1'
+    coroutines_version = '1.6.0'
 
     // OkHttp https://github.com/square/okhttp/blob/master/CHANGELOG.md
-    okhttp_version = '4.9.1'
+    okhttp_version = '5.0.0-alpha.5'
 
     // Retrofit https://github.com/square/retrofit/blob/master/CHANGELOG.md
     retrofit_version = '2.9.0'
 
     // Jodatime Android https://github.com/dlew/joda-time-android/blob/main/CHANGELOG.md
-    jodatime_version = '2.10.9.1'
+    jodatime_version = '2.10.12.2'
 
     // Leak Canary https://square.github.io/leakcanary/changelog/
-    leak_canary_version = '2.7'
+    leak_canary_version = '2.8.1'
 
     // Coil https://github.com/coil-kt/coil/blob/main/CHANGELOG.md
-    coil_version = '1.3.2'
+    coil_version = '1.4.0'
 
     // Jsoup https://github.com/jhy/jsoup/blob/master/CHANGES
-    jsoup_version = '1.14.1'
+    jsoup_version = '1.14.3'
 
     // Koin https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
-    koin_version = '3.1.2'
+    koin_version = '3.1.5'
 
     // Timber https://github.com/JakeWharton/timber/blob/trunk/CHANGELOG.md
     timber_version = '5.0.1'
