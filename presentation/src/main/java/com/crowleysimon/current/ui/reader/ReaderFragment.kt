@@ -6,11 +6,13 @@ import android.text.Html
 import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.util.TypedValue.applyDimension
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ErrorResource
@@ -24,16 +26,37 @@ import com.crowleysimon.current.ui.SpaceItemDecoration
 import com.crowleysimon.current.ui.reader.item.ArticleCardItem
 import com.crowleysimon.current.ui.viewBinding
 import com.crowleysimon.data.model.Article
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import org.joda.time.DateTime
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class ReaderFragment : Fragment(R.layout.fragment_reader) {
+class ReaderFragment : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(FragmentReaderBinding::bind)
     private val viewModel: ReaderViewModel by viewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_reader, container, false)
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog {
+        val dialog = BottomSheetDialog(requireContext(), theme)
+
+        // Force the sheet to open in expanded mode, otherwise the apply filters button could be hidden
+        dialog.setOnShowListener { dialogListener ->
+            val bottomSheetDialog = dialogListener as BottomSheetDialog
+            val bottomSheetView = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
+            bottomSheetView?.let { BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED }
+        }
+
+        return dialog
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

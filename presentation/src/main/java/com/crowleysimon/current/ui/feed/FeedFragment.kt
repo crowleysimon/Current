@@ -40,10 +40,13 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         viewModel.routerData.observe(viewLifecycleOwner, Observer(this::routeTo))
     }
 
-    private fun routeTo(routeInfo: Pair<String, String?>) = findNavController().navigate(
-        R.id.readerFragment,
-        bundleOf("articleId" to routeInfo.first, "feedId" to routeInfo.second)
-    )
+    private fun routeTo(routeInfo: Pair<String, String?>) {
+
+        findNavController().navigate(
+            R.id.readerFragment,
+            bundleOf("articleId" to routeInfo.first, "feedId" to routeInfo.second)
+        )
+    }
 
     private fun handleRepositoryDataState(resource: Resource<FeedUiModel>) = when (resource) {
         is LoadingResource -> setupScreenForLoadingState()

@@ -14,7 +14,7 @@
                 android:name="articleId" />
         </action>
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/readerFragment"
         android:name="com.crowleysimon.current.ui.reader.ReaderFragment"
         android:label="ReaderFragment" >
@@ -26,5 +26,5 @@
             android:name="feedId"
             app:argType="string"
             android:defaultValue='""' />
-    </fragment>
+    </dialog>
 </navigation>
