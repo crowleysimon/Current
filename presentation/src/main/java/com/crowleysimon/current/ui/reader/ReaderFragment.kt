@@ -21,6 +21,7 @@ import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.databinding.FragmentReaderBinding
+import com.crowleysimon.current.extensions.convertDpToPx
 import com.crowleysimon.current.extensions.formatTimeStamp
 import com.crowleysimon.current.extensions.loadUrl
 import com.crowleysimon.current.ui.SpaceItemDecoration
@@ -87,16 +88,13 @@ class ReaderFragment : BottomSheetDialogFragment() {
 
     private fun setupArticlesForSuccessState(data: List<ArticleCardItem>) {
         if (binding.relatedArticlesListView.adapter == null) {
-            binding.relatedArticlesListView.addItemDecoration(SpaceItemDecoration(16.convertDpToPx()))
+            binding.relatedArticlesListView.addItemDecoration(SpaceItemDecoration(16.convertDpToPx(resources)))
             binding.relatedArticlesListView.adapter =
                 GroupAdapter<GroupieViewHolder>().apply { addAll(data) }
         } else {
             (binding.relatedArticlesListView.adapter as GroupAdapter).updateAsync(data)
         }
     }
-
-    private fun Int.convertDpToPx() =
-        applyDimension(COMPLEX_UNIT_DIP, toFloat(), resources.displayMetrics).toInt()
 
     private fun setupScreenForLoadingState() {
 

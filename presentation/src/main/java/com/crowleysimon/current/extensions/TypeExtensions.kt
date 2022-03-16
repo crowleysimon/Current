@@ -1,6 +1,8 @@
 package com.crowleysimon.current.extensions
 
 import android.content.Context
+import android.content.res.Resources
+import android.util.TypedValue
 import com.crowleysimon.current.R
 import org.joda.time.DateTime
 import org.joda.time.Interval
@@ -49,3 +51,6 @@ fun DateTime.formatTimeStamp(context: Context): String {
     val dtf = DateTimeFormat.forPattern("dd MMMM yyyy")
     return dtf.print(this)
 }
+
+fun Int.convertDpToPx(resources: Resources) =
+    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toFloat(), resources.displayMetrics).toInt()

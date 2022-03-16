@@ -12,6 +12,8 @@ import com.crowleysimon.current.data.LoadingResource
 import com.crowleysimon.current.data.Resource
 import com.crowleysimon.current.data.SuccessResource
 import com.crowleysimon.current.databinding.FragmentFeedBinding
+import com.crowleysimon.current.extensions.convertDpToPx
+import com.crowleysimon.current.ui.SpaceItemDecoration
 import com.crowleysimon.current.ui.feed.model.FeedUiModel
 import com.crowleysimon.current.ui.viewBinding
 import com.xwray.groupie.GroupAdapter
@@ -33,6 +35,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         viewModel.refreshRepositories("https://www.polygon.com/rss/index.xml")
         viewModel.refreshRepositories("https://www.vox.com/rss/index.xml")
         viewModel.fetchArticles()
+        binding.feedRecyclerView.addItemDecoration(SpaceItemDecoration(16.convertDpToPx(resources)))
     }
 
     private fun bindObservers() {
