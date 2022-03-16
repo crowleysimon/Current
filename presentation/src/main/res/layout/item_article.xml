@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/articleCardView"
     android:layout_width="match_parent"
-    android:layout_height="128dp">
+    android:layout_height="wrap_content"
+    android:minHeight="128dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/articleImageView"
@@ -85,6 +86,7 @@
         android:fontFamily="@font/open_sans"
         android:textColor="?android:textColorSecondary"
         android:textSize="12sp"
+        android:maxLines="3"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline"

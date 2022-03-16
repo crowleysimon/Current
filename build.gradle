@@ -55,7 +55,7 @@ ext {
     leak_canary_version = '2.8.1'
 
     // Coil https://github.com/coil-kt/coil/blob/main/CHANGELOG.md
-    coil_version = '1.4.0'
+    coil_version = '2.0.0-rc01'
 
     // Jsoup https://github.com/jhy/jsoup/blob/master/CHANGES
     jsoup_version = '1.14.3'

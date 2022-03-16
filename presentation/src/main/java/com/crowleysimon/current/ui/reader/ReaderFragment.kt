@@ -14,6 +14,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.crowleysimon.current.R
 import com.crowleysimon.current.data.ErrorResource
 import com.crowleysimon.current.data.LoadingResource
@@ -42,17 +43,18 @@ class ReaderFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = inflater.inflate(R.layout.fragment_reader, container, false)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog {
-        val dialog = BottomSheetDialog(requireContext(), theme)
-
+        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
         // Force the sheet to open in expanded mode, otherwise the apply filters button could be hidden
         dialog.setOnShowListener { dialogListener ->
             val bottomSheetDialog = dialogListener as BottomSheetDialog
-            val bottomSheetView = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
-            bottomSheetView?.let { BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED }
+            val bottomSheetView = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+            val behaviour = BottomSheetBehavior.from(bottomSheetView)
+            behaviour.state = BottomSheetBehavior.STATE_EXPANDED
+            behaviour.skipCollapsed = true
         }
 
         return dialog
@@ -61,9 +63,7 @@ class ReaderFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindObservers()
-        val layoutManager = LinearLayoutManager(requireContext())
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.relatedArticlesListView.layoutManager = layoutManager
+        binding.relatedArticlesListView.layoutManager = LinearLayoutManager(requireContext()).apply { orientation = HORIZONTAL }
         viewModel.getArticle(arguments?.getString("articleId", "") ?: "")
         viewModel.getArticles(arguments?.getString("feedId", "") ?: "")
     }
@@ -87,7 +87,7 @@ class ReaderFragment : BottomSheetDialogFragment() {
 
     private fun setupArticlesForSuccessState(data: List<ArticleCardItem>) {
         if (binding.relatedArticlesListView.adapter == null) {
-            binding.relatedArticlesListView.addItemDecoration(SpaceItemDecoration(convertDpToPx(16)))
+            binding.relatedArticlesListView.addItemDecoration(SpaceItemDecoration(16.convertDpToPx()))
             binding.relatedArticlesListView.adapter =
                 GroupAdapter<GroupieViewHolder>().apply { addAll(data) }
         } else {
@@ -95,8 +95,8 @@ class ReaderFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun convertDpToPx(dp: Int) =
-        applyDimension(COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics).toInt()
+    private fun Int.convertDpToPx() =
+        applyDimension(COMPLEX_UNIT_DIP, toFloat(), resources.displayMetrics).toInt()
 
     private fun setupScreenForLoadingState() {
 
